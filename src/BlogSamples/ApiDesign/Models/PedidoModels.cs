@@ -1,4 +1,4 @@
-﻿// -----------------------------------------------------------------------
+// -----------------------------------------------------------------------
 // Artigo: Design de APIs REST: Verbos HTTP e Parameter Binding no ASP.NET Core
 // Models e interfaces de suporte
 // -----------------------------------------------------------------------
@@ -23,7 +23,7 @@ public record CriarItemPedidoRequest(
 
 public record SubstituirPedidoRequest(int Id, string ClienteId, string Status, List<CriarItemPedidoRequest> Itens);
 
-// Merge Patch: campos nulos = nao alterar
+// Merge Patch: campos nulos = não alterar
 public record AtualizarPedidoRequest(
     string? Status,
     string? MotivoCancelamento,
