@@ -1,105 +1,60 @@
-# Structured Logging Sample — .NET 8 + Azure Application Insights
+# BlogSamples — Repositório de Exemplos do Blog
 
-Aplicação de exemplo que demonstra uma estratégia completa de **logging estruturado, dinâmico e contextual** no .NET 8, integrada ao Azure Application Insights.
+Repositório consolidado com **todos** os exemplos de código dos artigos do blog [zocate.li](https://zocate.li/), organizados por **domínio técnico**.
 
-> **📖 Artigo completo:** [Log Sem Contexto é Ruído: Logging Dinâmico e Estruturado no .NET 8](https://zocate.li/posts/2026/logging-estruturado-dinamico-dotnet8-azure-appinsights/)
+> Cada pasta representa um domínio (API Design, Autenticação, Mensageria, etc.) e contém classes de exemplo extraídas diretamente dos artigos.
 
-## O que esta aplicação demonstra
+## Repositório
 
-| Feature | Descrição |
-|---------|-----------|
-| **Logging Estruturado** | Propriedades tipadas com `[LoggerMessage]` source generator — sem interpolação, sem boxing |
-| **Enriquecimento Automático** | Todo log inclui `ApplicationName`, `Version`, `HostName`, `Environment`, `CorrelationId` |
-| **Nível de Log Dinâmico** | Endpoint admin para alterar o nível de log em runtime com timer de reversão automática |
-| **Application Insights** | Integração completa com `TelemetryInitializer` — contexto da aplicação em toda telemetria |
-| **SonarQube Compliant** | Aderente às regras S6664, S2629 e S6667 |
-| **Testável** | Testes unitários com xUnit e NSubstitute |
+```bash
+git clone https://github.com/lzocateli/blog.git
+cd blog/sample/dotnet-blog-sample
+```
 
 ## Pré-requisitos
 
-- [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) (versão 8.0.418 fixada via `global.json`)
+| Tecnologia | Versão | Obrigatório | Uso |
+|-----------|--------|-------------|-----|
+| [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) | **8.0.418** (fixada via `global.json`) | Sim | Projeto principal e testes |
+| [Node.js](https://nodejs.org/) | 18+ | Não | Exemplos frontend Angular |
+| [Angular CLI](https://angular.dev/) | 16+ | Não | Exemplos frontend Angular |
+| [Python](https://www.python.org/) | 3.10+ | Não | Exemplos OAuth (Flask + MSAL) |
 
-## Como Rodar
+---
 
-```bash
-# Clonar o repositório
-git clone https://github.com/lzocateli/dotnet-structured-logging-sample.git
-cd dotnet-structured-logging-sample
+## Projeto .NET (Principal)
 
-# Rodar a aplicação
-dotnet run --project src/SampleApi
-```
-
-A API estará disponível em `http://localhost:5000`.
-
-## Endpoints
-
-### Admin — Controle de Nível de Log
+### Restaurar dependências
 
 ```bash
-# Consultar nível atual
-curl http://localhost:5000/api/admin/log-level
-
-# Alterar para Debug por 15 minutos (reverte automaticamente)
-curl -X POST http://localhost:5000/api/admin/log-level \
-  -H "Content-Type: application/json" \
-  -d '{"level": "Debug", "durationMinutes": 15}'
-
-# Reverter manualmente para o padrão
-curl -X DELETE http://localhost:5000/api/admin/log-level
+dotnet restore BlogSamples.sln
 ```
 
-### Orders — Demonstração de Logging Estruturado
+### Compilar
 
 ```bash
-# Criar um pedido (gera logs Information + Debug)
-curl -X POST http://localhost:5000/api/orders \
-  -H "Content-Type: application/json" \
-  -d '{"customerId": "CUST-001", "description": "Pedido de teste", "total": 199.90, "items": [{"productName": "Widget", "quantity": 2, "unitPrice": 99.95}]}'
-
-# Buscar um pedido pelo ID
-curl http://localhost:5000/api/orders/{id}
+dotnet build BlogSamples.sln
 ```
 
-## Testes
+### Executar a API
 
 ```bash
-dotnet test
+dotnet run --project src/BlogSamples
 ```
 
-## Estrutura do Projeto
+A API estará disponível em:
+- HTTP: `http://localhost:5101`
+- HTTPS: `https://localhost:7063`
 
-```
-├── src/SampleApi/
-│   ├── Program.cs                            # Composição e startup
-│   ├── appsettings.json                      # Configuração de logging e App Insights
-│   ├── Logging/
-│   │   ├── DynamicLogLevelConfigurationSource.cs    # IConfigurationSource customizado
-│   │   ├── DynamicLogLevelConfigurationProvider.cs  # ConfigurationProvider com OnReload()
-│   │   ├── DynamicLogLevelService.cs                # Singleton: SetLogLevel + Timer
-│   │   ├── LogEnrichmentMiddleware.cs               # BeginScope com contexto da app
-│   │   ├── ApplicationTelemetryInitializer.cs       # ITelemetryInitializer para App Insights
-│   │   ├── LoggingOptions.cs                        # IOptions<LoggingOptions>
-│   │   └── LogMessages.cs                           # [LoggerMessage] source generator
-│   ├── Endpoints/
-│   │   ├── LogLevelEndpoints.cs                     # POST/GET/DELETE /api/admin/log-level
-│   │   └── OrderEndpoints.cs                        # Exemplo com logging rico
-│   └── Models/
-│       ├── SetLogLevelRequest.cs
-│       └── Order.cs
-├── tests/SampleApi.Tests/
-│   └── Logging/
-│       ├── DynamicLogLevelConfigurationProviderTests.cs
-│       ├── DynamicLogLevelServiceTests.cs
-│       └── LogEnrichmentMiddlewareTests.cs
-├── global.json                               # .NET SDK 8.0.418 fixado
-├── nuget.config
-└── SampleApi.sln
+### Executar testes
+
+```bash
+dotnet test BlogSamples.sln
 ```
 
-## Configuração do Application Insights
+### Configuração opcional — Application Insights
 
-Para conectar ao Application Insights, configure a connection string no `appsettings.json`:
+Para o domínio Logging funcionar com Application Insights, configure em `appsettings.json`:
 
 ```json
 {
@@ -114,6 +69,223 @@ Ou via variável de ambiente:
 ```bash
 APPLICATIONINSIGHTS__CONNECTIONSTRING="InstrumentationKey=xxx;..."
 ```
+
+---
+
+## Frontend Angular (Exemplos de referência)
+
+Os projetos em `frontend/` são **exemplos de código** extraídos dos artigos — não são aplicações Angular CLI completas. Para utilizá-los em um projeto Angular real:
+
+### auth-spa — SPA com MSAL (Entra ID)
+
+Artigo: [Autenticação e Autorização: JWT, OAuth2 e OpenID Connect](https://zocate.li/posts/2026/autenticacao-autorizacao-jwt-oauth2-openid/)
+
+```bash
+# Criar projeto Angular (se necessário)
+ng new auth-spa --standalone
+cd auth-spa
+
+# Instalar dependências MSAL
+npm install @azure/msal-angular @azure/msal-browser
+
+# Copiar os arquivos de exemplo
+cp -r ../blog/sample/dotnet-blog-sample/frontend/auth-spa/src/app/* src/app/
+```
+
+Pacotes necessários: `@azure/msal-angular`, `@azure/msal-browser`
+
+### bff-spa — SPA com BFF (sem MSAL)
+
+Artigo: [BFF Backend For Frontend: Segurança em SPAs](https://zocate.li/posts/2026/bff-backend-for-frontend-seguranca/)
+
+```bash
+ng new bff-spa --standalone
+cd bff-spa
+
+# Sem dependências externas — usa HttpClient nativo com XSRF
+# Copiar os arquivos de exemplo
+cp -r ../blog/sample/dotnet-blog-sample/frontend/bff-spa/src/app/* src/app/
+```
+
+Sem pacotes extras — usa `HttpClient` nativo do Angular com configuração XSRF.
+
+### search-ui — Busca reativa com debounce
+
+Artigo: [Full-Text Search em API REST](https://zocate.li/posts/2025/full-text-search-api-rest-csharp-sqlserver-oracle-postgres/)
+
+```bash
+ng new search-ui --standalone
+cd search-ui
+
+# Sem dependências externas — usa RxJS nativo do Angular
+# Copiar os arquivos de exemplo
+cp -r ../blog/sample/dotnet-blog-sample/frontend/search-ui/src/* src/
+```
+
+Sem pacotes extras — usa `RxJS` (já incluso no Angular).
+
+---
+
+## Python (Exemplos OAuth)
+
+Artigo: [Autenticação e Autorização: JWT, OAuth2 e OpenID Connect](https://zocate.li/posts/2026/autenticacao-autorizacao-jwt-oauth2-openid/)
+
+### Criar ambiente virtual e instalar dependências
+
+```bash
+cd sample/dotnet-blog-sample/python
+
+# Criar e ativar ambiente virtual
+python -m venv .venv
+
+# Windows
+.venv\Scripts\Activate.ps1
+
+# Linux/macOS
+source .venv/bin/activate
+
+# Instalar dependências
+pip install flask msal requests
+```
+
+### oauth_flask_example.py — Authorization Code Flow
+
+Aplicação Flask com login interativo via Azure Entra ID.
+
+```bash
+# Configurar variáveis de ambiente
+$env:AZURE_CLIENT_ID="<seu-client-id>"
+$env:AZURE_CLIENT_SECRET="<seu-client-secret>"
+$env:AZURE_TENANT_ID="<seu-tenant-id>"
+$env:FLASK_SECRET_KEY="<chave-secreta>"
+
+# Executar
+python oauth_flask_example.py
+```
+
+### oauth_daemon_example.py — Client Credentials (M2M)
+
+Serviço daemon sem interação de usuário (machine-to-machine).
+
+```bash
+# Configurar variáveis de ambiente
+$env:AZURE_CLIENT_ID="<seu-client-id>"
+$env:AZURE_CLIENT_SECRET="<seu-client-secret>"
+$env:AZURE_TENANT_ID="<seu-tenant-id>"
+
+# Executar
+python oauth_daemon_example.py
+```
+
+---
+
+## SQL (Scripts Full-Text Search)
+
+Artigo: [Full-Text Search em API REST](https://zocate.li/posts/2025/full-text-search-api-rest-csharp-sqlserver-oracle-postgres/)
+
+Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no cliente SQL do banco correspondente:
+
+| Arquivo | Banco |
+|---------|-------|
+| `sql/fts-sqlserver-setup.sql` | SQL Server |
+| `sql/fts-postgres-setup.sql` | PostgreSQL |
+| `sql/fts-oracle-setup.sql` | Oracle |
+
+## Artigos e Domínios
+
+| # | Domínio | Artigo | Pasta |
+|---|---------|--------|-------|
+| 1 | ApiDesign | [Design de APIs REST: Verbos HTTP e Parameter Binding](https://zocate.li/posts/2025/design-api-rest-verbos-http-parameter-binding-aspnet-core/) | `src/BlogSamples/ApiDesign/` |
+| 2 | AsyncParallel | [Programação Assíncrona em C#: async/await e Threads](https://zocate.li/posts/2025/programacao-assincrona-csharp-async-await/) | `src/BlogSamples/AsyncParallel/` |
+| 3 | Authentication | [Keycloak: Autenticação Grátis com Container e C#](https://zocate.li/posts/2025/keycloak-autenticacao-gratuita-container-csharp/) | `src/BlogSamples/Authentication/Keycloak/` |
+| 4 | Messaging | [Gargalo em Banco de Dados: Mensageria e Paginação](https://zocate.li/posts/2026/gargalo-banco-dados-efcore-mensageria-paginacao/) | `src/BlogSamples/Messaging/` |
+| 5 | Authentication | [Autenticação e Autorização: JWT, OAuth2 e OpenID Connect](https://zocate.li/posts/2026/autenticacao-autorizacao-jwt-oauth2-openid/) | `src/BlogSamples/Authentication/EntraId/` + `frontend/auth-spa/` + `python/` |
+| 6 | AsyncParallel | [Paralelismo em C#: Parallel, PLINQ e Tasks na Prática](https://zocate.li/posts/2025/paralelismo-csharp-parallel-tasks/) | `src/BlogSamples/AsyncParallel/` |
+| 7 | DesignPatterns | [Padrões GoF: Código à Nuvem, Monólito ao Microserviço](https://zocate.li/posts/2025/arquitetura-software-gof-padroes-cloud-microservicos/) | `src/BlogSamples/DesignPatterns/` |
+| 8 | Logging | [Log Sem Contexto é Ruído: Logging Dinâmico e Estruturado no .NET 8](https://zocate.li/posts/2026/logging-estruturado-dinamico-dotnet8-azure-appinsights/) | `src/BlogSamples/Logging/` |
+| 9 | DataAccess | [Paginação em APIs REST com C# e EF Core](https://zocate.li/posts/2026/paginacao-api-rest-csharp-efcore-sqlserver-oracle-postgres/) | `src/BlogSamples/DataAccess/Pagination/` |
+| 10 | DataAccess | [EF Core Migrations: Multi-Projeto, Secrets e Scaffolding](https://zocate.li/posts/2026/efcore-migrations-multi-projeto-secrets-scaffolding/) | `src/BlogSamples/DataAccess/Migrations/` |
+| 11 | DataAccess | [EF Core 8 Fluent API: Mapeamento e Desacoplamento](https://zocate.li/posts/2026/efcore-fluent-api-mapeamento-desacoplamento/) | `src/BlogSamples/DataAccess/FluentApi/` |
+| 12 | Workers | [.NET Worker e Background Service: Alto Volume](https://zocate.li/posts/2026/dotnet-worker-background-service-processamento-alto-volume/) | `src/BlogSamples/Workers/` |
+| 13 | Authentication | [BFF Backend For Frontend: Segurança em SPAs](https://zocate.li/posts/2026/bff-backend-for-frontend-seguranca/) | `src/BlogSamples/Authentication/Bff/` + `frontend/bff-spa/` |
+| 14 | DataAccess | [Full-Text Search em API REST: C#, SQL Server e PostgreSQL](https://zocate.li/posts/2025/full-text-search-api-rest-csharp-sqlserver-oracle-postgres/) | `src/BlogSamples/DataAccess/FullTextSearch/` + `frontend/search-ui/` + `sql/` |
+
+## Estrutura do Projeto
+
+```
+BlogSamples.sln
+├── src/BlogSamples/                          # Projeto principal (.NET 8 Web API)
+│   ├── ApiDesign/                            # CRUD, Parameter Binding, Models
+│   ├── AsyncParallel/                        # async/await, CancellationToken, Parallel, PLINQ, Semaphore
+│   ├── Authentication/
+│   │   ├── Keycloak/                         # JWT + Keycloak (Controller, AdminService)
+│   │   ├── EntraId/                          # Microsoft Entra ID (DadosController)
+│   │   └── Bff/                              # Backend For Frontend (YARP proxy, CSRF, sessão)
+│   ├── DataAccess/
+│   │   ├── Pagination/                       # Offset, Keyset, Streaming, Time, HATEOAS
+│   │   ├── Migrations/                       # IDesignTimeDbContextFactory
+│   │   ├── FluentApi/                        # Entities, EntityConfigurations (1:1, 1:N, N:N, TPH, JSON, owned)
+│   │   └── FullTextSearch/                   # SQL Server, PostgreSQL, Oracle — SearchService, Repositories
+│   ├── DesignPatterns/
+│   │   ├── Creational/                       # Factory Method, Abstract Factory, Builder, Prototype, Singleton
+│   │   ├── Structural/                       # Adapter, Decorator, Facade, Proxy
+│   │   ├── Behavioral/                       # Strategy, Observer, Command, CQRS
+│   │   └── Cloud/                            # Circuit Breaker (Polly), Adapter anti-lock-in
+│   ├── Logging/                              # Logging estruturado, dinâmico, App Insights
+│   ├── Messaging/                            # RabbitMQ, Azure Service Bus, Batch insert
+│   ├── Workers/                              # BackgroundService, IHostedService, Graceful Shutdown
+│   ├── Endpoints/                            # Minimal API endpoints (logging demo)
+│   └── Models/                               # Shared models
+├── tests/BlogSamples.Tests/                  # xUnit + NSubstitute (13 testes)
+├── frontend/
+│   ├── auth-spa/                             # Angular 16+ SPA com MSAL (Entra ID)
+│   ├── bff-spa/                              # Angular 16+ SPA com BFF (sem MSAL)
+│   └── search-ui/                            # Angular — busca reativa com debounce
+├── python/
+│   ├── oauth_flask_example.py                # Flask + MSAL (Authorization Code)
+│   └── oauth_daemon_example.py               # M2M Client Credentials
+├── sql/
+│   ├── fts-sqlserver-setup.sql               # Full-Text Search — SQL Server
+│   ├── fts-postgres-setup.sql                # Full-Text Search — PostgreSQL
+│   └── fts-oracle-setup.sql                  # Full-Text Search — Oracle Text
+└── global.json                               # .NET SDK 8.0.418 fixado
+```
+
+## Adicionando Exemplos de Novos Artigos
+
+Para artigos futuros, basta:
+
+1. **Identificar o domínio técnico** do artigo (ex: `DataAccess`, `Authentication`, `Workers`, etc.)
+2. **Criar uma nova pasta** dentro do domínio correspondente em `src/BlogSamples/`
+   - Se o domínio já existe: crie uma subpasta (ex: `DataAccess/NovaFeature/`)
+   - Se é um domínio novo: crie a pasta na raiz do projeto (ex: `src/BlogSamples/NovoDomnio/`)
+3. **Adicionar as classes** com o namespace `BlogSamples.<Domínio>.<Subdomínio>`
+4. **Adicionar NuGet packages** necessários ao `BlogSamples.csproj`
+5. **Atualizar este README** — tabela de artigos e estrutura
+6. **Compilar e testar**: `dotnet build BlogSamples.sln && dotnet test BlogSamples.sln`
+
+### Exemplo: adicionando artigo sobre gRPC
+
+```
+src/BlogSamples/
+└── Communication/          ← novo domínio
+    └── Grpc/               ← subpasta do artigo
+        ├── GreeterService.cs
+        └── GrpcClientExample.cs
+```
+
+```csharp
+namespace BlogSamples.Communication.Grpc;
+
+public class GreeterService { /* ... */ }
+```
+
+### Convenções
+
+- **Namespace**: `BlogSamples.<Domínio>[.<Subdomínio>]`
+- **Cada arquivo** deve ter um comentário header com o artigo de origem e URL
+- **Classes são exemplos didáticos** — não precisam de testes (exceto Logging que já tem)
+- **Código em português** (nomes de variáveis, classes) conforme os artigos
 
 ## Licença
 
