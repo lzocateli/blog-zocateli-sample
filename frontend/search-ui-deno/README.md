@@ -19,7 +19,7 @@ deno task dev
 ## Diferenças em relação ao search-ui original (Node.js)
 
 | Aspecto | Node.js (`search-ui/`) | Deno (`search-ui-deno/`) |
-|---|---|---|
+| --- | --- | --- |
 | Package manager | npm | deno (cache global) |
 | Lockfile | `package-lock.json` | `deno.lock` |
 | node_modules | Sim (~350MB) | **Não** (cache global compartilhado) |
@@ -29,7 +29,7 @@ deno task dev
 
 ## Estrutura
 
-```
+```text
 search-ui-deno/
 ├── deno.json             # Import maps + tasks + nodeModulesDir: "none"
 ├── angular.json          # Workspace Angular

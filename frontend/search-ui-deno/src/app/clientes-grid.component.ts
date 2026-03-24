@@ -9,7 +9,7 @@ import {
   takeUntil
 } from 'rxjs/operators';
 import { ClienteService } from './cliente.service';
-import { ClienteDto } from './models';
+import { ClienteDto, PagedResult } from './models';
 
 @Component({
   selector: 'app-clientes-grid',
@@ -18,7 +18,7 @@ import { ClienteDto } from './models';
   templateUrl: './clientes-grid.component.html'
 })
 export class ClientesGridComponent implements OnInit, OnDestroy {
-  buscaControl = new FormControl('');
+  buscaControl = new FormControl<string>('', { nonNullable: true });
   clientes: ClienteDto[] = [];
   paginaAtual = 1;
   totalPaginas = 1;
@@ -35,11 +35,11 @@ export class ClientesGridComponent implements OnInit, OnDestroy {
       .pipe(
         debounceTime(400),
         distinctUntilChanged(),
-        filter((termo) => !termo || termo.length === 0 || termo.length >= 3),
+        filter((termo: string) => termo.length === 0 || termo.length >= 3),
         takeUntil(this.destroy$)
       )
-      .subscribe((termo) => {
-        this.termoBusca = termo ?? '';
+      .subscribe((termo: string) => {
+        this.termoBusca = termo;
         this.paginaAtual = 1;
         this.buscar();
       });
@@ -53,7 +53,7 @@ export class ClientesGridComponent implements OnInit, OnDestroy {
       .listar(this.termoBusca, this.paginaAtual, 20)
       .pipe(takeUntil(this.destroy$))
       .subscribe({
-        next: (resultado) => {
+        next: (resultado: PagedResult<ClienteDto>) => {
           this.clientes = resultado.itens;
           this.totalPaginas = resultado.totalPaginas;
           this.totalRegistros = resultado.totalRegistros;

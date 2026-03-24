@@ -21,7 +21,7 @@ bunx ng serve
 ## Diferenças em relação ao search-ui original (Node.js)
 
 | Aspecto | Node.js (`search-ui/`) | Bun (`search-ui-bun/`) |
-|---|---|---|
+| --- | --- | --- |
 | Package manager | npm | bun |
 | Lockfile | `package-lock.json` | `bun.lockb` (binário) |
 | Velocidade install | Base | ~25x mais rápido |
@@ -30,7 +30,7 @@ bunx ng serve
 
 ## Estrutura
 
-```
+```text
 search-ui-bun/
 ├── package.json          # Scripts com bunx ng serve
 ├── bunfig.toml           # Configuração do Bun
