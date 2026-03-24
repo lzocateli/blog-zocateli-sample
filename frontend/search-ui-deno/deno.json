@@ -1,0 +1,31 @@
+{
+  "nodeModulesDir": "none",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@angular/core"
+  },
+  "imports": {
+    "@angular/animations": "npm:@angular/animations@^19.2.0",
+    "@angular/common": "npm:@angular/common@^19.2.0",
+    "@angular/common/http": "npm:@angular/common@^19.2.0/http",
+    "@angular/compiler": "npm:@angular/compiler@^19.2.0",
+    "@angular/core": "npm:@angular/core@^19.2.0",
+    "@angular/forms": "npm:@angular/forms@^19.2.0",
+    "@angular/platform-browser": "npm:@angular/platform-browser@^19.2.0",
+    "@angular/platform-browser-dynamic": "npm:@angular/platform-browser-dynamic@^19.2.0",
+    "@angular/router": "npm:@angular/router@^19.2.0",
+    "@angular/build": "npm:@angular/build@^19.2.0",
+    "@angular/cli": "npm:@angular/cli@^19.2.0",
+    "@angular/compiler-cli": "npm:@angular/compiler-cli@^19.2.0",
+    "rxjs": "npm:rxjs@~7.8.0",
+    "rxjs/operators": "npm:rxjs@~7.8.0/operators",
+    "tslib": "npm:tslib@^2.6.0",
+    "zone.js": "npm:zone.js@~0.15.0",
+    "typescript": "npm:typescript@~5.7.0"
+  },
+  "tasks": {
+    "dev": "deno run -A npm:@angular/cli@^19.2.0 serve",
+    "build": "deno run -A npm:@angular/cli@^19.2.0 build",
+    "test": "deno run -A npm:@angular/cli@^19.2.0 test"
+  }
+}
