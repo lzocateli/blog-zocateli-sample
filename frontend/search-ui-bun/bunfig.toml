@@ -1,0 +1,7 @@
+[install]
+# Gera lockfile binário (bun.lockb) — mais rápido que package-lock.json
+saveTextLockfile = false
+
+[install.cache]
+# Usa cache global para evitar downloads repetidos
+disable = false
