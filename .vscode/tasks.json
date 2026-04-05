@@ -1,0 +1,87 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/BlogSamples.sln",
+                "--no-restore"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "restore",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "restore",
+                "${workspaceFolder}/BlogSamples.sln"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/BlogSamples.Tests/BlogSamples.Tests.csproj",
+                "--no-build"
+            ],
+            "problemMatcher": "$msCompile",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/src/BlogSamples/BlogSamples.csproj"
+            ],
+            "problemMatcher": "$msCompile",
+            "isBackground": true
+        },
+        {
+            "label": "search-ui-bun: install",
+            "type": "shell",
+            "command": "bun install",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend/search-ui-bun"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "search-ui-bun: start",
+            "type": "shell",
+            "command": "bun start",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend/search-ui-bun"
+            },
+            "problemMatcher": [],
+            "isBackground": true
+        },
+        {
+            "label": "search-ui-deno: dev",
+            "type": "shell",
+            "command": "deno task dev",
+            "options": {
+                "cwd": "${workspaceFolder}/frontend/search-ui-deno"
+            },
+            "problemMatcher": [],
+            "isBackground": true
+        }
+    ]
+}

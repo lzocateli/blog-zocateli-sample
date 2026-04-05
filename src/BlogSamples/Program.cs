@@ -15,11 +15,29 @@ builder.Services.Configure<LoggingOptions>(
 builder.Services.AddApplicationInsightsTelemetry();
 builder.Services.AddSingleton<ITelemetryInitializer, ApplicationTelemetryInitializer>();
 
+// --- OpenAPI / Swagger ---
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new() { Title = "BlogSamples API", Version = "v1" });
+});
+
 // --- Custom Services ---
 builder.Services.AddSingleton<DynamicLogLevelService>();
 builder.Services.AddSingleton<LogEnrichmentMiddleware>();
 
 var app = builder.Build();
+
+// --- Swagger UI em /docs ---
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogSamples API v1");
+    c.RoutePrefix = "docs";
+});
+
+// Redirecionar raiz para /docs
+app.MapGet("/", () => Results.Redirect("/docs")).ExcludeFromDescription();
 
 // --- Middleware Pipeline ---
 app.UseMiddleware<LogEnrichmentMiddleware>();
