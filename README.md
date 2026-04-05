@@ -15,10 +15,15 @@ cd blog/sample/dotnet-blog-sample
 
 | Tecnologia | Versão | Obrigatório | Uso |
 |-----------|--------|-------------|-----|
-| [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) | **8.0.418** (fixada via `global.json`) | Sim | Projeto principal e testes |
-| [Node.js](https://nodejs.org/) | 18+ | Não | Exemplos frontend Angular |
-| [Angular CLI](https://angular.dev/) | 16+ | Não | Exemplos frontend Angular |
+| [.NET 8 SDK](https://dotnet.microsoft.com/download/dotnet/8.0) | **8.0.303+** (fixada via `global.json`) | Sim | Projeto principal e testes |
+| [Node.js](https://nodejs.org/) | 22 LTS | Sim | Frontend Angular, Angular CLI |
+| [Angular CLI](https://angular.dev/) | 19+ | Sim | Projetos frontend Angular |
+| [Bun](https://bun.sh/) | latest | Não | Runtime alternativo (`search-ui-bun`) |
+| [Deno](https://deno.land/) | latest | Não | Runtime alternativo (`search-ui-deno`) |
 | [Python](https://www.python.org/) | 3.10+ | Não | Exemplos OAuth (Flask + MSAL) |
+| [uv](https://docs.astral.sh/uv/) | latest | Não | Gerenciamento de pacotes Python |
+
+> **Dev Container**: O Dockerfile em `.devcontainer/` já instala todas essas dependências automaticamente.
 
 ---
 
@@ -248,7 +253,7 @@ BlogSamples.sln
 │   ├── fts-sqlserver-setup.sql               # Full-Text Search — SQL Server
 │   ├── fts-postgres-setup.sql                # Full-Text Search — PostgreSQL
 │   └── fts-oracle-setup.sql                  # Full-Text Search — Oracle Text
-└── global.json                               # .NET SDK 8.0.418 fixado
+└── global.json                               # .NET SDK 8.0.303+ fixado
 ```
 
 ## Adicionando Exemplos de Novos Artigos
@@ -286,6 +291,28 @@ public class GreeterService { /* ... */ }
 - **Cada arquivo** deve ter um comentário header com o artigo de origem e URL
 - **Classes são exemplos didáticos** — não precisam de testes (exceto Logging que já tem)
 - **Código em português** (nomes de variáveis, classes) conforme os artigos
+
+## Imagens Docker Base
+
+Para criar imagens customizadas a partir das oficiais da Microsoft, para uso como base do dev container ou pipelines CI/CD:
+
+### .NET SDK 8.0.419
+
+```bash
+docker pull mcr.microsoft.com/dotnet/sdk:8.0.419-jammy-amd64
+docker tag mcr.microsoft.com/dotnet/sdk:8.0.419-jammy-amd64 lzocateli/dotnet-sdk:8.0.419-jammy-amd64
+docker push lzocateli/dotnet-sdk:8.0.419-jammy-amd64
+```
+
+### ASP.NET Core Runtime 8.0.15
+
+```bash
+docker pull mcr.microsoft.com/dotnet/aspnet:8.0.15-jammy-amd64
+docker tag mcr.microsoft.com/dotnet/aspnet:8.0.15-jammy-amd64 lzocateli/aspnet:8.0.15-jammy-amd64
+docker push lzocateli/aspnet:8.0.15-jammy-amd64
+```
+
+> **Nota**: A versão do Runtime ASP.NET que acompanha o SDK 8.0.419 é a **8.0.15**. Verifique em [dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0) a correspondência exata de versões.
 
 ## Licença
 

@@ -1,0 +1,52 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/dotnet
+{
+    "name": ".NET",
+    "build": {
+        "context": ".",
+        "dockerfile": "Dockerfile"
+    },
+    "mounts": [
+        "source=${localEnv:TMP}\\linux,target=/tmp,type=bind,consistency=cached",
+        "source=${localEnv:APPDATA}\\pip\\linux\\pip.conf,target=/root/.config/pip/pip.conf,type=bind,consistency=cached",
+        "source=${localEnv:APPDATA}\\NuGet\\linux\\NuGet.Config,target=/root/.nuget/NuGet/NuGet.Config,type=bind,consistency=cached",
+        "source=${localEnv:APPDATA}\\Microsoft\\UserSecrets,target=/root/.microsoft/usersecrets,type=bind,consistency=cached"
+    ],
+    "containerEnv": {
+        "HTTP_PROXY": "${localEnv:HTTP_PROXY}",
+        "HTTPS_PROXY": "${localEnv:HTTPS_PROXY}",
+        "NO_PROXY": "${localEnv:NO_PROXY}",
+        "WORKFOLDER": "${containerWorkspaceFolder}"
+    },
+    "onCreateCommand": "chmod +x ./.devcontainer/custom-install.sh && chmod +x ./.devcontainer/.zshrc",
+    "postCreateCommand": "./.devcontainer/custom-install.sh",
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.fontFamily": "MesloLGM Nerd Font" // ou "MesloLGM NF"
+            },
+            "extensions": [
+                "ms-dotnettools.vscode-dotnet-runtime",
+                "ms-dotnettools.csharp",
+                "ms-dotnettools.csdevkit",
+                "ms-azuretools.vscode-docker",
+                "ms-vscode.powershell",
+                "ms-vsliveshare.vsliveshare",
+                "ecmel.vscode-html-css",
+                "adrianwilczynski.asp-net-core-snippet-pack",
+                "k--kato.docomment",
+                "EditorConfig.EditorConfig",
+                "yzhang.markdown-all-in-one",
+                "christian-kohler.path-intellisense",
+                "Gruntfuggly.todo-tree",
+                "quicktype.quicktype",
+                "eamodio.gitlens",
+                "patcx.vscode-nuget-gallery",
+                "humao.rest-client",
+                "shynet.vscode-taskkill",
+                "dotjoshjohnson.xml"
+            ]
+        }
+    }
+}

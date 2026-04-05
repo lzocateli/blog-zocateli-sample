@@ -1,0 +1,56 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "BlogSamples API",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/src/BlogSamples/bin/Debug/net8.0/BlogSamples.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/src/BlogSamples",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development",
+                "ASPNETCORE_URLS": "http://localhost:5101"
+            }
+        },
+        {
+            "name": "BlogSamples Tests",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "dotnet",
+            "args": [
+                "test",
+                "${workspaceFolder}/tests/BlogSamples.Tests/BlogSamples.Tests.csproj",
+                "--no-build"
+            ],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "name": "Search UI (Bun)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "bun start",
+            "cwd": "${workspaceFolder}/frontend/search-ui-bun"
+        },
+        {
+            "name": "Search UI (Deno)",
+            "type": "node-terminal",
+            "request": "launch",
+            "command": "deno task dev",
+            "cwd": "${workspaceFolder}/frontend/search-ui-deno"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "API + Search UI (Bun)",
+            "configurations": ["BlogSamples API", "Search UI (Bun)"]
+        },
+        {
+            "name": "API + Search UI (Deno)",
+            "configurations": ["BlogSamples API", "Search UI (Deno)"]
+        }
+    ]
+}
