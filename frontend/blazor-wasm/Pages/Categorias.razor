@@ -1,0 +1,224 @@
+@* -----------------------------------------------------------------------
+   Artigo: Zero JavaScript: CRUD Completo com Blazor WASM e Radzen
+   Categorias — DataGrid com inline editing (sem dialog)
+   Pattern alternativo ao CRUD de Produtos
+   ----------------------------------------------------------------------- *@
+
+@page "/categorias"
+
+<PageTitle>Categorias — Blog Samples</PageTitle>
+
+<RadzenText TextStyle="TextStyle.H3" class="rz-mb-4">Categorias</RadzenText>
+
+<RadzenStack Orientation="Orientation.Horizontal" class="rz-mb-4">
+    <RadzenButton Text="Nova Categoria" Icon="add" ButtonStyle="ButtonStyle.Primary"
+                  Click="@InserirNova" Disabled="@(categoriaEditando is not null)" />
+</RadzenStack>
+
+<RadzenDataGrid @ref="grid" TItem="CategoriaDto"
+                Data="@categorias" AllowSorting="true"
+                EditMode="DataGridEditMode.Single"
+                RowUpdate="@OnRowUpdate" RowCreate="@OnRowCreate"
+                Style="width: 100%;">
+    <Columns>
+        <RadzenDataGridColumn TItem="CategoriaDto" Property="Id" Title="ID" Width="70px"
+                              TextAlign="TextAlign.Center" />
+
+        <RadzenDataGridColumn TItem="CategoriaDto" Property="Nome" Title="Nome" MinWidth="200px">
+            <EditTemplate Context="cat">
+                <RadzenTextBox @bind-Value="cat.Nome" Style="width: 100%;" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="CategoriaDto" Property="Descricao" Title="Descrição" MinWidth="250px">
+            <EditTemplate Context="cat">
+                <RadzenTextBox @bind-Value="cat.Descricao" Style="width: 100%;" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="CategoriaDto" Property="Ativo" Title="Status" Width="100px"
+                              TextAlign="TextAlign.Center">
+            <Template Context="cat">
+                <RadzenBadge BadgeStyle="@(cat.Ativo ? BadgeStyle.Success : BadgeStyle.Light)"
+                             Text="@(cat.Ativo ? "Ativo" : "Inativo")" />
+            </Template>
+            <EditTemplate Context="cat">
+                <RadzenSwitch @bind-Value="cat.Ativo" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="CategoriaDto" Title="Ações" Width="180px"
+                              TextAlign="TextAlign.Center" Sortable="false">
+            <Template Context="cat">
+                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                              Click="@(() => EditarLinha(cat))" class="rz-mr-1" />
+                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small"
+                              Click="@(() => ConfirmarExclusao(cat))" />
+            </Template>
+            <EditTemplate Context="cat">
+                <RadzenButton Icon="check" ButtonStyle="ButtonStyle.Success" Size="ButtonSize.Small"
+                              Click="@(() => SalvarLinha(cat))" class="rz-mr-1" />
+                <RadzenButton Icon="close" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                              Click="@CancelarEdicao" />
+            </EditTemplate>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    RadzenDataGrid<CategoriaDto> grid = default!;
+    IList<CategoriaDto> categorias = [];
+    CategoriaDto? categoriaEditando;
+
+    [Inject] CategoriaApiService CategoriaService { get; set; } = default!;
+    [Inject] DialogService DialogService { get; set; } = default!;
+    [Inject] NotificationService NotificationService { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await CarregarDados();
+    }
+
+    async Task CarregarDados()
+    {
+        var resultado = await CategoriaService.ListarAsync();
+        categorias = resultado.ToList();
+    }
+
+    async Task InserirNova()
+    {
+        var nova = new CategoriaDto { Ativo = true };
+        categorias.Insert(0, nova);
+        categoriaEditando = nova;
+        await grid.EditRow(nova);
+    }
+
+    async Task EditarLinha(CategoriaDto cat)
+    {
+        categoriaEditando = cat;
+        await grid.EditRow(cat);
+    }
+
+    async Task SalvarLinha(CategoriaDto cat)
+    {
+        await grid.UpdateRow(cat);
+    }
+
+    async Task CancelarEdicao()
+    {
+        if (categoriaEditando is not null && categoriaEditando.Id == 0)
+        {
+            categorias.Remove(categoriaEditando);
+        }
+
+        categoriaEditando = null;
+        grid.CancelEditRow(categoriaEditando!);
+        await CarregarDados();
+    }
+
+    async Task OnRowCreate(CategoriaDto cat)
+    {
+        try
+        {
+            var request = new CriarCategoriaRequest
+            {
+                Nome = cat.Nome,
+                Descricao = cat.Descricao,
+                Ativo = cat.Ativo
+            };
+            await CategoriaService.CriarAsync(request);
+            NotificationService.Notify(new NotificationMessage
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Categoria criada",
+                Detail = $"\"{cat.Nome}\" foi adicionada.",
+                Duration = 4000
+            });
+        }
+        catch (HttpRequestException)
+        {
+            NotificationService.Notify(new NotificationMessage
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Erro ao criar",
+                Detail = "Não foi possível criar a categoria.",
+                Duration = 6000
+            });
+        }
+
+        categoriaEditando = null;
+        await CarregarDados();
+    }
+
+    async Task OnRowUpdate(CategoriaDto cat)
+    {
+        try
+        {
+            var request = new AtualizarCategoriaRequest
+            {
+                Nome = cat.Nome,
+                Descricao = cat.Descricao,
+                Ativo = cat.Ativo
+            };
+            await CategoriaService.AtualizarAsync(cat.Id, request);
+            NotificationService.Notify(new NotificationMessage
+            {
+                Severity = NotificationSeverity.Success,
+                Summary = "Categoria atualizada",
+                Detail = $"\"{cat.Nome}\" foi salva.",
+                Duration = 4000
+            });
+        }
+        catch (HttpRequestException)
+        {
+            NotificationService.Notify(new NotificationMessage
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Erro ao atualizar",
+                Detail = "Não foi possível atualizar a categoria.",
+                Duration = 6000
+            });
+        }
+
+        categoriaEditando = null;
+        await CarregarDados();
+    }
+
+    async Task ConfirmarExclusao(CategoriaDto cat)
+    {
+        var confirmado = await DialogService.Confirm(
+            $"Deseja excluir a categoria \"{cat.Nome}\"? Categorias com produtos associados não podem ser excluídas.",
+            "Confirmar Exclusão",
+            new ConfirmOptions
+            {
+                OkButtonText = "Excluir",
+                CancelButtonText = "Cancelar"
+            });
+
+        if (confirmado == true)
+        {
+            try
+            {
+                await CategoriaService.RemoverAsync(cat.Id);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Categoria excluída",
+                    Detail = $"\"{cat.Nome}\" foi removida.",
+                    Duration = 4000
+                });
+                await CarregarDados();
+            }
+            catch (HttpRequestException)
+            {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Erro ao excluir",
+                    Detail = "Não foi possível excluir. A categoria pode ter produtos associados.",
+                    Duration = 6000
+                });
+            }
+        }
+    }
+}

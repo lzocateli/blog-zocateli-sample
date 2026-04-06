@@ -1,4 +1,4 @@
-FROM lzocateli/dotnet-sdk:8.0.419-jammy-amd64
+FROM lzocateli/dotnet-sdk:10.0.201-noble
 
 ENV HTTP_PROXY=
 ENV HTTPS_PROXY=

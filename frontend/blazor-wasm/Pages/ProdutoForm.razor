@@ -1,0 +1,152 @@
+@* -----------------------------------------------------------------------
+   Artigo: Zero JavaScript: CRUD Completo com Blazor WASM e Radzen
+   ProdutoForm — Formulário de criação/edição em Dialog
+   Reutilizável: ProdutoId null = criar, preenchido = editar
+   ----------------------------------------------------------------------- *@
+
+<RadzenTemplateForm TItem="CriarProdutoRequest" Data="@model" Submit="@OnSubmit">
+    <RadzenStack Gap="1rem">
+        <RadzenFormField Text="Nome" Variant="Variant.Outlined">
+            <ChildContent>
+                <RadzenTextBox @bind-Value="model.Nome" MaxLength="200" />
+            </ChildContent>
+            <Helper>
+                <RadzenRequiredValidator Component="Nome" Text="Nome é obrigatório" />
+            </Helper>
+        </RadzenFormField>
+
+        <RadzenFormField Text="Descrição" Variant="Variant.Outlined">
+            <ChildContent>
+                <RadzenTextArea @bind-Value="model.Descricao" Rows="3" />
+            </ChildContent>
+        </RadzenFormField>
+
+        <RadzenRow Gap="1rem">
+            <RadzenColumn Size="6">
+                <RadzenFormField Text="Preço (R$)" Variant="Variant.Outlined" Style="width: 100%;">
+                    <ChildContent>
+                        <RadzenNumeric TValue="decimal" @bind-Value="model.Preco" Min="0.01m" Format="N2" />
+                    </ChildContent>
+                    <Helper>
+                        <RadzenNumericRangeValidator Component="Preco" Min="0.01" Text="Preço deve ser maior que zero" />
+                    </Helper>
+                </RadzenFormField>
+            </RadzenColumn>
+            <RadzenColumn Size="6">
+                <RadzenFormField Text="Estoque" Variant="Variant.Outlined" Style="width: 100%;">
+                    <ChildContent>
+                        <RadzenNumeric TValue="int" @bind-Value="model.QuantidadeEstoque" Min="0" />
+                    </ChildContent>
+                </RadzenFormField>
+            </RadzenColumn>
+        </RadzenRow>
+
+        <RadzenFormField Text="Categoria" Variant="Variant.Outlined">
+            <ChildContent>
+                <RadzenDropDown TValue="int" @bind-Value="model.CategoriaId"
+                                Data="@categorias" TextProperty="Nome" ValueProperty="Id"
+                                Placeholder="Selecione uma categoria..." AllowFiltering="true" />
+            </ChildContent>
+            <Helper>
+                <RadzenRequiredValidator Component="CategoriaId" Text="Selecione uma categoria"
+                                         DefaultValue="0" />
+            </Helper>
+        </RadzenFormField>
+
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0.5rem">
+            <RadzenSwitch @bind-Value="model.Ativo" />
+            <RadzenText Text="@(model.Ativo ? "Ativo" : "Inativo")" />
+        </RadzenStack>
+
+        <RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.End" Gap="0.5rem">
+            <RadzenButton Text="Cancelar" ButtonStyle="ButtonStyle.Light"
+                          Click="@(() => DialogService.Close(false))" ButtonType="ButtonType.Button" />
+            <RadzenButton Text="Salvar" ButtonStyle="ButtonStyle.Primary"
+                          ButtonType="ButtonType.Submit" Icon="save" />
+        </RadzenStack>
+    </RadzenStack>
+</RadzenTemplateForm>
+
+@code {
+    [Parameter] public int? ProdutoId { get; set; }
+
+    [Inject] ProdutoApiService ProdutoService { get; set; } = default!;
+    [Inject] CategoriaApiService CategoriaService { get; set; } = default!;
+    [Inject] DialogService DialogService { get; set; } = default!;
+    [Inject] NotificationService NotificationService { get; set; } = default!;
+
+    CriarProdutoRequest model = new();
+    IReadOnlyList<CategoriaDto> categorias = [];
+
+    protected override async Task OnInitializedAsync()
+    {
+        categorias = await CategoriaService.ListarAsync();
+
+        if (ProdutoId.HasValue)
+        {
+            var produto = await ProdutoService.ObterPorIdAsync(ProdutoId.Value);
+            if (produto is not null)
+            {
+                model = new CriarProdutoRequest
+                {
+                    Nome = produto.Nome,
+                    Descricao = produto.Descricao,
+                    Preco = produto.Preco,
+                    QuantidadeEstoque = produto.QuantidadeEstoque,
+                    CategoriaId = produto.CategoriaId,
+                    Ativo = produto.Ativo
+                };
+            }
+        }
+    }
+
+    async Task OnSubmit()
+    {
+        try
+        {
+            if (ProdutoId.HasValue)
+            {
+                var request = new AtualizarProdutoRequest
+                {
+                    Nome = model.Nome,
+                    Descricao = model.Descricao,
+                    Preco = model.Preco,
+                    QuantidadeEstoque = model.QuantidadeEstoque,
+                    CategoriaId = model.CategoriaId,
+                    Ativo = model.Ativo
+                };
+                await ProdutoService.AtualizarAsync(ProdutoId.Value, request);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Produto atualizado",
+                    Detail = $"\"{model.Nome}\" foi salvo com sucesso.",
+                    Duration = 4000
+                });
+            }
+            else
+            {
+                await ProdutoService.CriarAsync(model);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Produto criado",
+                    Detail = $"\"{model.Nome}\" foi adicionado com sucesso.",
+                    Duration = 4000
+                });
+            }
+
+            DialogService.Close(true);
+        }
+        catch (HttpRequestException)
+        {
+            NotificationService.Notify(new NotificationMessage
+            {
+                Severity = NotificationSeverity.Error,
+                Summary = "Erro ao salvar",
+                Detail = "Não foi possível salvar o produto. Verifique os dados e tente novamente.",
+                Duration = 6000
+            });
+        }
+    }
+}

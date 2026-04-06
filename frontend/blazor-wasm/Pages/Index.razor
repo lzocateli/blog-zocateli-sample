@@ -1,0 +1,87 @@
+@* -----------------------------------------------------------------------
+   Artigo: Zero JavaScript: CRUD Completo com Blazor WASM e Radzen
+   Dashboard — página inicial com contadores e resumo
+   ----------------------------------------------------------------------- *@
+
+@page "/"
+
+<PageTitle>Dashboard — Blog Samples</PageTitle>
+
+<RadzenText TextStyle="TextStyle.H3" class="rz-mb-4">Dashboard</RadzenText>
+
+<RadzenRow Gap="1rem" class="rz-mb-4">
+    <RadzenColumn Size="12" SizeMD="4">
+        <RadzenCard>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
+                <RadzenIcon Icon="inventory_2" Style="font-size: 2.5rem; color: var(--rz-primary);" />
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Caption" class="rz-m-0">Total de Produtos</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H4" class="rz-m-0">@totalProdutos</RadzenText>
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenColumn>
+
+    <RadzenColumn Size="12" SizeMD="4">
+        <RadzenCard>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
+                <RadzenIcon Icon="category" Style="font-size: 2.5rem; color: var(--rz-secondary);" />
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Caption" class="rz-m-0">Categorias</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H4" class="rz-m-0">@totalCategorias</RadzenText>
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenColumn>
+
+    <RadzenColumn Size="12" SizeMD="4">
+        <RadzenCard>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem">
+                <RadzenIcon Icon="check_circle" Style="font-size: 2.5rem; color: var(--rz-success);" />
+                <RadzenStack Gap="0">
+                    <RadzenText TextStyle="TextStyle.Caption" class="rz-m-0">Produtos Ativos</RadzenText>
+                    <RadzenText TextStyle="TextStyle.H4" class="rz-m-0">@produtosAtivos</RadzenText>
+                </RadzenStack>
+            </RadzenStack>
+        </RadzenCard>
+    </RadzenColumn>
+</RadzenRow>
+
+<RadzenCard>
+    <RadzenText TextStyle="TextStyle.H5" class="rz-mb-2">Sobre este projeto</RadzenText>
+    <RadzenText>
+        Aplicação Blazor WebAssembly Standalone (.NET 10) com Radzen Blazor — CRUD completo de produtos
+        consumindo uma API REST. Zero JavaScript escrito pelo desenvolvedor.
+    </RadzenText>
+    <RadzenText TextStyle="TextStyle.Caption" class="rz-mt-2">
+        Código fonte: <RadzenLink Path="https://github.com/lzocateli/blog-zocateli-sample" Target="_blank" Text="blog-zocateli-sample" />
+        | Artigo: <RadzenLink Path="https://zocate.li" Target="_blank" Text="zocate.li" />
+    </RadzenText>
+</RadzenCard>
+
+@code {
+    int totalProdutos;
+    int totalCategorias;
+    int produtosAtivos;
+
+    [Inject] ProdutoApiService ProdutoService { get; set; } = default!;
+    [Inject] CategoriaApiService CategoriaService { get; set; } = default!;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var produtosTask = ProdutoService.ListarAsync(pagina: 1, tamanhoPagina: 1);
+        var categoriasTask = CategoriaService.ListarAsync();
+
+        await Task.WhenAll(produtosTask, categoriasTask);
+
+        var produtos = produtosTask.Result;
+        var categorias = categoriasTask.Result;
+
+        totalProdutos = produtos.TotalRegistros;
+        totalCategorias = categorias.Count;
+
+        // Buscar todos para contar ativos
+        var todosProdutos = await ProdutoService.ListarAsync(pagina: 1, tamanhoPagina: totalProdutos);
+        produtosAtivos = todosProdutos.Itens.Count(p => p.Ativo);
+    }
+}

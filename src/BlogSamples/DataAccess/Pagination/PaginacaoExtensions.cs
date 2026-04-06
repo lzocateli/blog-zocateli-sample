@@ -5,9 +5,6 @@
 // ==========================================================================
 
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.OpenApi;
-using Microsoft.OpenApi.Any;
-using Microsoft.OpenApi.Models;
 
 namespace BlogSamples.DataAccess.Pagination;
 
