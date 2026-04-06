@@ -1,0 +1,148 @@
+@* -----------------------------------------------------------------------
+   Artigo: Zero JavaScript: CRUD Completo com Blazor WASM e Radzen
+   Produtos — DataGrid com paginação server-side, busca, CRUD via Dialog
+   ----------------------------------------------------------------------- *@
+
+@page "/produtos"
+
+<PageTitle>Produtos — Blog Samples</PageTitle>
+
+<RadzenText TextStyle="TextStyle.H3" class="rz-mb-4">Produtos</RadzenText>
+
+<RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="1rem" class="rz-mb-4">
+    <RadzenTextBox Placeholder="Buscar produtos..." @bind-Value="filtro" Change="@OnFiltroChanged"
+                   Style="width: 300px;" />
+    <RadzenButton Text="Novo Produto" Icon="add" ButtonStyle="ButtonStyle.Primary"
+                  Click="@(() => AbrirFormulario(null))" />
+</RadzenStack>
+
+<RadzenDataGrid @ref="grid" TItem="ProdutoDto"
+                Data="@produtos" Count="@totalRegistros"
+                LoadData="@CarregarDados"
+                AllowPaging="true" PageSize="20"
+                AllowSorting="true"
+                PagerHorizontalAlign="HorizontalAlign.Center"
+                IsLoading="@isLoading"
+                Style="width: 100%;">
+    <Columns>
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="Id" Title="ID" Width="70px"
+                              TextAlign="TextAlign.Center" Sortable="false" />
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="Nome" Title="Nome" MinWidth="200px" />
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="CategoriaNome" Title="Categoria" Width="150px" />
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="Preco" Title="Preço" Width="130px"
+                              TextAlign="TextAlign.End" FormatString="{0:C2}" />
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="QuantidadeEstoque" Title="Estoque" Width="100px"
+                              TextAlign="TextAlign.Center" />
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Property="Ativo" Title="Status" Width="100px"
+                              TextAlign="TextAlign.Center" Sortable="false">
+            <Template Context="produto">
+                <RadzenBadge BadgeStyle="@(produto.Ativo ? BadgeStyle.Success : BadgeStyle.Light)"
+                             Text="@(produto.Ativo ? "Ativo" : "Inativo")" />
+            </Template>
+        </RadzenDataGridColumn>
+
+        <RadzenDataGridColumn TItem="ProdutoDto" Title="Ações" Width="140px"
+                              TextAlign="TextAlign.Center" Sortable="false">
+            <Template Context="produto">
+                <RadzenButton Icon="edit" ButtonStyle="ButtonStyle.Light" Size="ButtonSize.Small"
+                              Click="@(() => AbrirFormulario(produto.Id))" class="rz-mr-1" />
+                <RadzenButton Icon="delete" ButtonStyle="ButtonStyle.Danger" Size="ButtonSize.Small"
+                              Click="@(() => ConfirmarExclusao(produto))" />
+            </Template>
+        </RadzenDataGridColumn>
+    </Columns>
+</RadzenDataGrid>
+
+@code {
+    RadzenDataGrid<ProdutoDto> grid = default!;
+    IEnumerable<ProdutoDto> produtos = [];
+    int totalRegistros;
+    string? filtro;
+    bool isLoading;
+
+    [Inject] ProdutoApiService ProdutoService { get; set; } = default!;
+    [Inject] DialogService DialogService { get; set; } = default!;
+    [Inject] NotificationService NotificationService { get; set; } = default!;
+
+    async Task CarregarDados(LoadDataArgs args)
+    {
+        isLoading = true;
+
+        var pagina = (args.Skip ?? 0) / (args.Top ?? 20) + 1;
+        var tamanhoPagina = args.Top ?? 20;
+
+        var resultado = await ProdutoService.ListarAsync(pagina, tamanhoPagina, filtro);
+
+        produtos = resultado.Itens;
+        totalRegistros = resultado.TotalRegistros;
+
+        isLoading = false;
+    }
+
+    async Task OnFiltroChanged()
+    {
+        await grid.FirstPage(true);
+    }
+
+    async Task AbrirFormulario(int? produtoId)
+    {
+        var titulo = produtoId.HasValue ? "Editar Produto" : "Novo Produto";
+
+        var resultado = await DialogService.OpenAsync<ProdutoForm>(titulo,
+            new Dictionary<string, object?> { { "ProdutoId", produtoId } },
+            new DialogOptions
+            {
+                Width = "600px",
+                CloseDialogOnOverlayClick = false,
+                CloseDialogOnEsc = true
+            });
+
+        if (resultado is true)
+        {
+            await grid.Reload();
+        }
+    }
+
+    async Task ConfirmarExclusao(ProdutoDto produto)
+    {
+        var confirmado = await DialogService.Confirm(
+            $"Deseja excluir o produto \"{produto.Nome}\"?",
+            "Confirmar Exclusão",
+            new ConfirmOptions
+            {
+                OkButtonText = "Excluir",
+                CancelButtonText = "Cancelar"
+            });
+
+        if (confirmado == true)
+        {
+            try
+            {
+                await ProdutoService.RemoverAsync(produto.Id);
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Success,
+                    Summary = "Produto excluído",
+                    Detail = $"\"{produto.Nome}\" foi removido com sucesso.",
+                    Duration = 4000
+                });
+                await grid.Reload();
+            }
+            catch (HttpRequestException)
+            {
+                NotificationService.Notify(new NotificationMessage
+                {
+                    Severity = NotificationSeverity.Error,
+                    Summary = "Erro ao excluir",
+                    Detail = "Não foi possível excluir o produto. Tente novamente.",
+                    Duration = 6000
+                });
+            }
+        }
+    }
+}
