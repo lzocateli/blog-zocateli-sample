@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Scripting — DotnetRunSingleFile são scripts standalone para "dotnet run arquivo.cs"
+         e NÃO devem ser compilados como parte deste projeto web. -->
+    <Compile Remove="Scripting/DotnetRunSingleFile/**" />
+    <None Include="Scripting/DotnetRunSingleFile/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Logging / Telemetria (Artigo 8) -->
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
 
