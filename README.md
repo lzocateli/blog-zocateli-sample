@@ -240,6 +240,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 14 | DataAccess | [Full-Text Search em API REST: C#, SQL Server e PostgreSQL](https://zocate.li/posts/2025/full-text-search-api-rest-csharp-sqlserver-oracle-postgres/) | `src/BlogSamples/DataAccess/FullTextSearch/` + `frontend/search-ui/` + `sql/` |
 | 15 | Produtos | [Zero JavaScript: CRUD Completo com Blazor WASM e Radzen](https://zocate.li/posts/2026/blazor-wasm-crud-radzen-tutorial-dotnet10/) | `src/BlogSamples/Produtos/` + `frontend/blazor-wasm/` |
 | 16 | Scripting | [C# como Script no .NET: Como Usar e Quando Vale a Pena](https://zocate.li/posts/2026/executar-csharp-como-script-dotnet/) | `src/BlogSamples/Scripting/` |
+| 17 | Cache | [Redis: Por que Chaves Grandes Destroem o Desempenho Compartilhado](https://zocate.li/posts/2026/redis-chaves-grandes-ambientes-compartilhados/) | `src/BlogSamples/Cache/Redis/` |
 
 ## Estrutura do Projeto
 
@@ -271,6 +272,8 @@ BlogSamples.sln
 │   │   ├── DotnetScript/                     # Scripts .csx com NuGet inline (dotnet-script)
 │   │   ├── DotnetRunSingleFile/              # Arquivo .cs standalone para "dotnet run arquivo.cs"
 │   │   └── ExemploPratico/                   # Cenário real: CSV → POST HTTP via dotnet-script
+│   ├── Cache/
+│   │   └── Redis/                            # BigKey scanner, Hash sharding, compressão, TTL, namespacing
 │   ├── Workers/                              # BackgroundService, IHostedService, Graceful Shutdown
 │   ├── Endpoints/                            # Minimal API endpoints (logging demo)
 │   └── Models/                               # Shared models
