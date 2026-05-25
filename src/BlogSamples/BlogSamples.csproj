@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <!-- Scripting — DotnetRunSingleFile são scripts standalone para "dotnet run arquivo.cs"
+         e NÃO devem ser compilados como parte deste projeto web. -->
+    <Compile Remove="Scripting/DotnetRunSingleFile/**" />
+    <None Include="Scripting/DotnetRunSingleFile/**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <!-- Logging / Telemetria (Artigo 8) -->
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.22.0" />
 
@@ -39,6 +46,9 @@
 
     <!-- OpenAPI / Swagger (Artigo 9 — PaginacaoExtensions) -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+
+    <!-- Cache Redis (Artigo 17) -->
+    <PackageReference Include="StackExchange.Redis" Version="2.8.24" />
   </ItemGroup>
 
 </Project>
