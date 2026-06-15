@@ -1,0 +1,22 @@
+.detail {
+  margin-top: 16px;
+}
+
+.detail h2 {
+  margin-bottom: 12px;
+}
+
+.detail dl {
+  margin: 0;
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 8px;
+}
+
+.detail dt {
+  font-weight: 700;
+}
+
+.detail dd {
+  margin: 0;
+}

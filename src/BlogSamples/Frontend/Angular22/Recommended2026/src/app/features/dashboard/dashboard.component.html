@@ -1,0 +1,90 @@
+<section class="layout">
+  <header class="topbar">
+    <h1>Recommended 2026 - Angular Architecture</h1>
+    <a routerLink="/users" class="btn-link">Open Users Module</a>
+  </header>
+
+  <section class="stats-grid">
+    <article appCardHover class="card">
+      <span>Total users</span>
+      <strong>{{ store.stats().total }}</strong>
+    </article>
+    <article appCardHover class="card">
+      <span>Active users</span>
+      <strong>{{ store.stats().active }}</strong>
+    </article>
+    <article appCardHover class="card">
+      <span>Admins</span>
+      <strong>{{ store.stats().admins }}</strong>
+    </article>
+  </section>
+
+  @if (notifications.hasMessage()) {
+    <section class="notice" [class.notice-info]="notifications.level() === 'info'" [class.notice-success]="notifications.level() === 'success'" [class.notice-warning]="notifications.level() === 'warning'">
+      <span>{{ notifications.message() }}</span>
+      <button type="button" (click)="clearMessage()">Dismiss</button>
+    </section>
+  }
+
+  <section class="filters card">
+    <input
+      #term
+      type="text"
+      placeholder="Search by name, email or team"
+      (input)="onSearch(term.value)"
+    />
+
+    <select #role (change)="onRoleChange($any(role.value))">
+      @for (option of roleOptions; track option) {
+        <option [value]="option">{{ option }}</option>
+      }
+    </select>
+
+    <label>
+      <input #active type="checkbox" (change)="onOnlyActive(active.checked)" />
+      Only active
+    </label>
+  </section>
+
+  @if (store.loading()) {
+    <app-loading-spinner label="Loading dashboard data..."></app-loading-spinner>
+  }
+
+  @if (store.error(); as error) {
+    <section class="error-box">
+      <p>{{ error }}</p>
+      <button (click)="retry()">Retry</button>
+    </section>
+  }
+
+  @if (hasUsers()) {
+    <section class="card table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Team</th>
+            <th>Role</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (user of store.filteredUsers(); track user.id) {
+            <tr>
+              <td>{{ user.name }}</td>
+              <td>{{ user.team }}</td>
+              <td>{{ user.role | userRoleLabel }}</td>
+              <td>
+                <span [class.active]="user.active" [class.inactive]="!user.active">
+                  {{ user.active ? 'active' : 'inactive' }}
+                </span>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </section>
+  }
+
+  <router-outlet></router-outlet>
+</section>

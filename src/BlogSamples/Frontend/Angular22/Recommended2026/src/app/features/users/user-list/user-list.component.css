@@ -1,0 +1,33 @@
+.users {
+  margin-top: 16px;
+}
+
+.users h2 {
+  margin-top: 0;
+}
+
+.users ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.users li {
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.actions a,
+.actions button {
+  font-size: 12px;
+}
