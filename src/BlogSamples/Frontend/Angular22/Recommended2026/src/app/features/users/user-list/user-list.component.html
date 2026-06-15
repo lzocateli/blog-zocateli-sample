@@ -1,0 +1,21 @@
+<section class="users card">
+  <h2>Users feature module</h2>
+
+  <ul>
+    @for (user of store.filteredUsers(); track user.id) {
+      <li>
+        <div>
+          <strong>{{ user.name }}</strong>
+          <small>{{ user.email }}</small>
+        </div>
+        <div class="actions">
+          <a [routerLink]="['/users', user.id]">Details</a>
+          <button (click)="toggleActive(user.id)">Toggle active</button>
+          @if (user.role !== 'admin') {
+            <button (click)="promote(user.id)">Promote</button>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</section>

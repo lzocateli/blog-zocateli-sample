@@ -1,0 +1,22 @@
+<section class="detail card">
+  <a routerLink="/users">Back to users</a>
+
+  @if (user(); as current) {
+    <h2>{{ current.name }}</h2>
+    <dl>
+      <dt>Email</dt>
+      <dd>{{ current.email }}</dd>
+
+      <dt>Role</dt>
+      <dd>{{ current.role }}</dd>
+
+      <dt>Team</dt>
+      <dd>{{ current.team }}</dd>
+
+      <dt>Status</dt>
+      <dd>{{ current.active ? 'active' : 'inactive' }}</dd>
+    </dl>
+  } @else {
+    <p>User not found.</p>
+  }
+</section>
