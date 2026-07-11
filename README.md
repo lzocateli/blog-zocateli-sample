@@ -241,6 +241,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 15 | Produtos | [Zero JavaScript: CRUD Completo com Blazor WASM e Radzen](https://zocate.li/posts/2026/blazor-wasm-crud-radzen-tutorial-dotnet10/) | `src/BlogSamples/Produtos/` + `frontend/blazor-wasm/` |
 | 16 | Scripting | [C# como Script no .NET: Como Usar e Quando Vale a Pena](https://zocate.li/posts/2026/executar-csharp-como-script-dotnet/) | `src/BlogSamples/Scripting/` |
 | 17 | Cache | [Redis: Por que Chaves Grandes Destroem o Desempenho Compartilhado](https://zocate.li/posts/2026/redis-chaves-grandes-ambientes-compartilhados/) | `src/BlogSamples/Cache/Redis/` |
+| 18 | Security | [Certificados SSL/TLS: Como Funcionam e Como Validar](https://zocate.li/posts/2026/certificado-ssl-tls/) | `src/BlogSamples/Security/Certificates/` + `python/ssl_validation_example.py` |
 
 ## Estrutura do Projeto
 
@@ -274,6 +275,8 @@ BlogSamples.sln
 │   │   └── ExemploPratico/                   # Cenário real: CSV → POST HTTP via dotnet-script
 │   ├── Cache/
 │   │   └── Redis/                            # BigKey scanner, Hash sharding, compressão, TTL, namespacing
+│   ├── Security/
+│   │   └── Certificates/                     # Validacao TLS, CA customizada e mTLS com HttpClient
 │   ├── Workers/                              # BackgroundService, IHostedService, Graceful Shutdown
 │   ├── Endpoints/                            # Minimal API endpoints (logging demo)
 │   └── Models/                               # Shared models
@@ -288,7 +291,8 @@ BlogSamples.sln
 │   └── search-ui/                            # Angular — busca reativa com debounce
 ├── python/
 │   ├── oauth_flask_example.py                # Flask + MSAL (Authorization Code)
-│   └── oauth_daemon_example.py               # M2M Client Credentials
+│   ├── oauth_daemon_example.py               # M2M Client Credentials
+│   └── ssl_validation_example.py             # Validacao SSL/TLS e mTLS
 ├── sql/
 │   ├── fts-sqlserver-setup.sql               # Full-Text Search — SQL Server
 │   ├── fts-postgres-setup.sql                # Full-Text Search — PostgreSQL
