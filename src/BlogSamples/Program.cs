@@ -2,6 +2,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using BlogSamples.Endpoints;
 using BlogSamples.Logging;
 using BlogSamples.Produtos;
+using BlogSamples.Security.Cors;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,16 +27,8 @@ builder.Services.AddSwaggerGen(c =>
 // --- Produtos (Artigo 15 — Blazor WASM + Radzen) ---
 builder.Services.AddSingleton<IProdutoService, ProdutoService>();
 
-// --- CORS (Blazor WASM em porta diferente da API) ---
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("BlazorWasm", policy =>
-    {
-        policy.WithOrigins("http://localhost:5200", "https://localhost:7200")
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-    });
-});
+// --- CORS (policies explícitas por cenário) ---
+builder.Services.AddCorsSeguranca();
 
 // --- Custom Services ---
 builder.Services.AddSingleton<DynamicLogLevelService>();
@@ -55,7 +48,7 @@ app.UseSwaggerUI(c =>
 app.MapGet("/", () => Results.Redirect("/docs")).ExcludeFromDescription();
 
 // --- CORS ---
-app.UseCors("BlazorWasm");
+app.UseCors();
 
 // --- Middleware Pipeline ---
 app.UseMiddleware<LogEnrichmentMiddleware>();
@@ -63,6 +56,7 @@ app.UseMiddleware<LogEnrichmentMiddleware>();
 // --- Endpoints ---
 app.MapLogLevelEndpoints();
 app.MapOrderEndpoints();
+app.MapCorsEndpoints();
 app.MapProdutoEndpoints();
 
 // --- Startup Log ---
