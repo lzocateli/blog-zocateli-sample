@@ -5,6 +5,7 @@
 // -----------------------------------------------------------------------
 
 using BlogSamples.Produtos.Models;
+using BlogSamples.Security.Cors;
 
 namespace BlogSamples.Produtos;
 
@@ -14,7 +15,8 @@ public static class ProdutoEndpoints
     {
         // ======================== PRODUTOS ========================
         var produtos = app.MapGroup("/api/produtos")
-            .WithTags("Produtos");
+            .WithTags("Produtos")
+            .RequireCors(CorsPolicyConfiguration.PoliticaBlazorWasm);
 
         produtos.MapGet("/", async (
             IProdutoService service,
@@ -66,7 +68,8 @@ public static class ProdutoEndpoints
 
         // ======================== CATEGORIAS ========================
         var categorias = app.MapGroup("/api/categorias")
-            .WithTags("Categorias");
+            .WithTags("Categorias")
+            .RequireCors(CorsPolicyConfiguration.PoliticaBlazorWasm);
 
         categorias.MapGet("/", async (IProdutoService service) =>
         {
