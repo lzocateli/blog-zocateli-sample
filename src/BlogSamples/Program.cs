@@ -1,6 +1,7 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using BlogSamples.Endpoints;
 using BlogSamples.Logging;
+using BlogSamples.Messaging.TempoReal;
 using BlogSamples.Produtos;
 using BlogSamples.Security.Cors;
 
@@ -30,6 +31,21 @@ builder.Services.AddSingleton<IProdutoService, ProdutoService>();
 // --- CORS (policies explícitas por cenário) ---
 builder.Services.AddCorsSeguranca();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("TempoReal", policy =>
+    {
+        policy
+            .WithOrigins("http://localhost:4200", "http://localhost:4201", "http://localhost:4202")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
+    });
+});
+
+builder.Services.AddSingleton<TempoRealProcessamentoService>();
+builder.Services.AddSignalR();
+
 // --- Custom Services ---
 builder.Services.AddSingleton<DynamicLogLevelService>();
 builder.Services.AddSingleton<LogEnrichmentMiddleware>();
@@ -49,6 +65,7 @@ app.MapGet("/", () => Results.Redirect("/docs")).ExcludeFromDescription();
 
 // --- CORS ---
 app.UseCors();
+app.UseWebSockets();
 
 // --- Middleware Pipeline ---
 app.UseMiddleware<LogEnrichmentMiddleware>();
@@ -58,6 +75,8 @@ app.MapLogLevelEndpoints();
 app.MapOrderEndpoints();
 app.MapCorsEndpoints();
 app.MapProdutoEndpoints();
+app.MapTempoRealEndpoints();
+app.MapHub<TempoRealHub>("/hubs/tempo-real").RequireCors("TempoReal");
 
 // --- Startup Log ---
 var options = builder.Configuration.GetSection(LoggingOptions.SectionName).Get<LoggingOptions>() ?? new LoggingOptions();
