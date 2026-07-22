@@ -244,6 +244,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 18 | Security | [Certificados SSL/TLS: Como Funcionam e Como Validar](https://zocate.li/posts/2026/certificado-ssl-tls/) | `src/BlogSamples/Security/Certificates/` + `python/ssl_validation_example.py` |
 | 19 | Security | [CORS não é detalhe: por que times ainda erram esse básico](https://zocate.li/posts/2026/cors-seguranca-nginx-aspnet-core/) | `src/BlogSamples/Security/Cors/` |
 | 20 | AsyncParallel | [Git History na Prática: Debug e Auditoria em Escala](https://zocate.li/posts/2026/git-history-debug-auditoria-escala/) | `src/BlogSamples/AsyncParallel/GitHistoryAnalysis/` |
+| 21 | Orchestration | [Apache Airflow com .NET 10: dispare e monitore DAGs](https://zocate.li/posts/2026/apache-airflow-dotnet-10-api-dags/) | `src/BlogSamples/Orchestration/Airflow/` |
 
 ## Estrutura do Projeto
 
@@ -268,6 +269,8 @@ BlogSamples.sln
 │   │   └── Cloud/                            # Circuit Breaker (Polly), Adapter anti-lock-in
 │   ├── Logging/                              # Logging estruturado, dinâmico, App Insights
 │   ├── Messaging/                            # RabbitMQ, Azure Service Bus, Batch insert
+│   ├── Orchestration/
+│   │   └── Airflow/                          # API v2, DAG e stack Docker persistente
 │   ├── Produtos/                             # API Produtos CRUD (Minimal API, in-memory)
 │   │   └── Models/                           # Produto, Categoria, DTOs, Requests
 │   ├── Scripting/                            # C# como script — top-level, dotnet-script, dotnet run
