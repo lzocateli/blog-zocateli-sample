@@ -5,6 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <DefaultItemExcludes>$(DefaultItemExcludes);Orchestration/Airflow/config/**;Orchestration/Airflow/data/**;Orchestration/Airflow/logs/**;Orchestration/Airflow/plugins/**</DefaultItemExcludes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,6 +47,7 @@
 
     <!-- OpenAPI / Swagger (Artigo 9 — PaginacaoExtensions) -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
 
     <!-- Cache Redis (Artigo 17) -->
     <PackageReference Include="StackExchange.Redis" Version="2.8.24" />

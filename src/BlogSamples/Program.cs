@@ -2,6 +2,7 @@ using Microsoft.ApplicationInsights.Extensibility;
 using BlogSamples.Endpoints;
 using BlogSamples.Logging;
 using BlogSamples.Messaging.TempoReal;
+using BlogSamples.Orchestration.Airflow;
 using BlogSamples.Produtos;
 using BlogSamples.Security.Cors;
 
@@ -46,6 +47,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddSingleton<TempoRealProcessamentoService>();
 builder.Services.AddSignalR();
 
+// --- Apache Airflow 3 API v2 ---
+builder.Services.AddAirflowClient(builder.Configuration);
+
 // --- Custom Services ---
 builder.Services.AddSingleton<DynamicLogLevelService>();
 builder.Services.AddSingleton<LogEnrichmentMiddleware>();
@@ -76,6 +80,7 @@ app.MapOrderEndpoints();
 app.MapCorsEndpoints();
 app.MapProdutoEndpoints();
 app.MapTempoRealEndpoints();
+app.MapAirflowEndpoints();
 app.MapHub<TempoRealHub>("/hubs/tempo-real").RequireCors("TempoReal");
 
 // --- Startup Log ---
