@@ -46,6 +46,7 @@
 
     <!-- OpenAPI / Swagger (Artigo 9 — PaginacaoExtensions) -->
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="10.0.1" />
+    <PackageReference Include="Microsoft.OpenApi" Version="2.7.5" />
 
     <!-- Cache Redis (Artigo 17) -->
     <PackageReference Include="StackExchange.Redis" Version="2.8.24" />

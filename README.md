@@ -243,6 +243,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 17 | Cache | [Redis: Por que Chaves Grandes Destroem o Desempenho Compartilhado](https://zocate.li/posts/2026/redis-chaves-grandes-ambientes-compartilhados/) | `src/BlogSamples/Cache/Redis/` |
 | 18 | Security | [Certificados SSL/TLS: Como Funcionam e Como Validar](https://zocate.li/posts/2026/certificado-ssl-tls/) | `src/BlogSamples/Security/Certificates/` + `python/ssl_validation_example.py` |
 | 19 | Security | [CORS não é detalhe: por que times ainda erram esse básico](https://zocate.li/posts/2026/cors-seguranca-nginx-aspnet-core/) | `src/BlogSamples/Security/Cors/` |
+| 20 | AsyncParallel | [Git History na Prática: Debug e Auditoria em Escala](https://zocate.li/posts/2026/git-history-debug-auditoria-escala/) | `src/BlogSamples/AsyncParallel/GitHistoryAnalysis/` |
 
 ## Estrutura do Projeto
 
@@ -250,7 +251,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 BlogSamples.sln
 ├── src/BlogSamples/                          # Projeto principal (.NET 10 Web API)
 │   ├── ApiDesign/                            # CRUD, Parameter Binding, Models
-│   ├── AsyncParallel/                        # async/await, CancellationToken, Parallel, PLINQ, Semaphore
+│   ├── AsyncParallel/                        # async/await, Parallel, Channels e análise de Git history
 │   ├── Authentication/
 │   │   ├── Keycloak/                         # JWT + Keycloak (Controller, AdminService)
 │   │   ├── EntraId/                          # Microsoft Entra ID (DadosController)

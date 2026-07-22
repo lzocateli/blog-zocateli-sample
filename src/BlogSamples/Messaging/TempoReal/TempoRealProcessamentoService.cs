@@ -15,11 +15,10 @@ public sealed class TempoRealProcessamentoService
             tarefaId,
             descricao,
             TempoRealStatus.Criada,
-            "Recebida",
             0,
             0,
             DateTimeOffset.UtcNow,
-            "Tarefa criada",
+            "Recebida",
             "Aguardando processamento");
 
         _tarefas[tarefaId] = estadoInicial;
