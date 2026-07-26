@@ -245,6 +245,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 19 | Security | [CORS não é detalhe: por que times ainda erram esse básico](https://zocate.li/posts/2026/cors-seguranca-nginx-aspnet-core/) | `src/BlogSamples/Security/Cors/` |
 | 20 | AsyncParallel | [Git History na Prática: Debug e Auditoria em Escala](https://zocate.li/posts/2026/git-history-debug-auditoria-escala/) | `src/BlogSamples/AsyncParallel/GitHistoryAnalysis/` |
 | 21 | Orchestration | [Apache Airflow com .NET 10: dispare e monitore DAGs](https://zocate.li/posts/2026/apache-airflow-dotnet-10-api-dags/) | `src/BlogSamples/Orchestration/Airflow/` |
+| 22 | Messaging | [Arquitetura de Eventos sem Caos: Guia Prático](https://zocate.li/posts/2026/arquitetura-eventos-sem-caos/) | `src/BlogSamples/Messaging/EventDriven/` |
 
 ## Estrutura do Projeto
 

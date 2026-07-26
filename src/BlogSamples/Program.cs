@@ -1,6 +1,7 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using BlogSamples.Endpoints;
 using BlogSamples.Logging;
+using BlogSamples.Messaging.EventDriven;
 using BlogSamples.Messaging.TempoReal;
 using BlogSamples.Orchestration.Airflow;
 using BlogSamples.Produtos;
@@ -81,6 +82,7 @@ app.MapCorsEndpoints();
 app.MapProdutoEndpoints();
 app.MapTempoRealEndpoints();
 app.MapAirflowEndpoints();
+app.MapEventDrivenEndpoints();
 app.MapHub<TempoRealHub>("/hubs/tempo-real").RequireCors("TempoReal");
 
 // --- Startup Log ---
