@@ -1,0 +1,56 @@
+services:
+  postgres:
+    image: lzocateli/postgresql:17-bookworm
+    container_name: blogsamples-postgres
+    environment:
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      PG_DATABASE: ${PG_DATABASE:-blogsamples}
+      PG_USER: ${PG_USER:-blogsamples}
+      PG_PASSWORD: ${PG_PASSWORD:-blogsamples}
+      PG_DATABASE_ENCODING: UTF8
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U blogsamples -d blogsamples"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  servicebus-emulator:
+    image: lzocateli/azure-servicebus-emulator:2.0.1
+    platform: linux/amd64
+    container_name: blogsamples-servicebus-emulator
+    ports:
+      - "${SERVICEBUS_AMQP_PORT:-5672}:5672"
+      - "${SERVICEBUS_ADMIN_PORT:-5300}:5300"
+    volumes:
+      - ./servicebus/config.json:/servicebus/config.json:ro
+    environment:
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-YourStrong@Passw0rd}
+    depends_on:
+      servicebus-sql:
+        condition: service_started
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://127.0.0.1:5300/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+
+  servicebus-sql:
+    image: lzocateli/mssql-server:2022-root
+    platform: linux/amd64
+    container_name: blogsamples-servicebus-sql
+    environment:
+      ACCEPT_EULA: ${ACCEPT_EULA:-Y}
+      SA_PASSWORD: ${MSSQL_SA_PASSWORD:-YourStrong@Passw0rd}
+      MSSQL_SA_PASSWORD: ${MSSQL_SA_PASSWORD:-YourStrong@Passw0rd}
+    healthcheck:
+      test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -C -S localhost -U sa -P \"$$SA_PASSWORD\" -Q 'SELECT 1' || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+
+volumes:
+  postgres-data:

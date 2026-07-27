@@ -1,0 +1,69 @@
+{
+  "UserConfig": {
+    "Namespaces": [
+      {
+        "Name": "dev-store",
+        "Queues": [],
+        "Topics": [
+          {
+            "Name": "saga-pedidos",
+            "Properties": {
+              "DefaultMessageTimeToLive": "PT1H",
+              "DuplicateDetectionHistoryTimeWindow": "PT10M"
+            },
+            "Subscriptions": [
+              {
+                "Name": "orquestrador",
+                "Properties": {
+                  "LockDuration": "PT1M",
+                  "MaxDeliveryCount": 3,
+                  "DeadLetteringOnMessageExpiration": true,
+                  "DefaultMessageTimeToLive": "PT1H"
+                },
+                "Rules": [
+                  {
+                    "Name": "event-type-orquestrador",
+                    "FilterType": "Sql",
+                    "FilterExpression": "event-type = 'PedidoCriado'"
+                  }
+                ]
+              },
+              {
+                "Name": "estoque",
+                "Properties": {
+                  "LockDuration": "PT1M",
+                  "MaxDeliveryCount": 3,
+                  "DeadLetteringOnMessageExpiration": true,
+                  "DefaultMessageTimeToLive": "PT1H"
+                },
+                "Rules": [
+                  {
+                    "Name": "event-type-estoque",
+                    "FilterType": "Sql",
+                    "FilterExpression": "event-type = 'ReservarEstoque'"
+                  }
+                ]
+              },
+              {
+                "Name": "pagamento",
+                "Properties": {
+                  "LockDuration": "PT1M",
+                  "MaxDeliveryCount": 3,
+                  "DeadLetteringOnMessageExpiration": true,
+                  "DefaultMessageTimeToLive": "PT1H"
+                },
+                "Rules": [
+                  {
+                    "Name": "event-type-pagamento",
+                    "FilterType": "Sql",
+                    "FilterExpression": "event-type = 'ProcessarPagamento'"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
