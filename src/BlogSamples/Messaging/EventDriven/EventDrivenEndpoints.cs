@@ -4,8 +4,6 @@ namespace BlogSamples.Messaging.EventDriven;
 
 public static class EventDrivenEndpoints
 {
-    private static readonly Dictionary<Guid, PedidoViewModel> Pedidos = [];
-
     public static void MapEventDrivenEndpoints(this IEndpointRouteBuilder app)
     {
         var group = app.MapGroup("/event-driven")
@@ -13,37 +11,49 @@ public static class EventDrivenEndpoints
 
         group.MapPost("/pedidos", CreatePedido);
         group.MapGet("/pedidos/{id:guid}", GetPedido);
+        group.MapGet("/outbox", GetOutbox);
     }
 
-    private static Created<PedidoViewModel> CreatePedido(CriarPedidoRequest request)
+    private static async Task<Created<PedidoViewModel>> CreatePedido(
+        CriarPedidoRequest request,
+        EventDrivenOutboxStore outboxStore,
+        CancellationToken ct)
     {
-        var pedidoId = Guid.NewGuid();
-        var state = new PedidoSagaState
-        {
-            PedidoId = pedidoId,
-            Status = SagaStatus.Inicializado,
-            Etapa = SagaEtapa.AguardandoReserva
-        };
-
-        var result = PedidoSagaOrquestrador.HandlePedidoCriado(state);
-        var response = new PedidoViewModel
-        {
-            Id = pedidoId,
-            ClienteId = request.ClienteId,
-            Valor = request.Valor,
-            Status = result.Status,
-            Etapa = result.Etapa,
-            CriadoEm = DateTimeOffset.UtcNow
-        };
-
-        Pedidos[pedidoId] = response;
-        return TypedResults.Created($"/event-driven/pedidos/{pedidoId}", response);
+        var response = await outboxStore.CreatePedidoWithOutboxAsync(request, ct);
+        return TypedResults.Created($"/event-driven/pedidos/{response.Id}", response);
     }
 
-    private static IResult GetPedido(Guid id)
+    private static async Task<IResult> GetPedido(
+        Guid id,
+        EventDrivenOutboxStore outboxStore,
+        CancellationToken ct)
     {
-        return Pedidos.TryGetValue(id, out var pedido)
-            ? Results.Ok(pedido)
-            : Results.NotFound(new { error = "Pedido não encontrado" });
+        var pedido = await outboxStore.GetPedidoAsync(id, ct);
+        return pedido is null
+            ? Results.NotFound(new { error = "Pedido não encontrado" })
+            : Results.Ok(pedido);
+    }
+
+    private static async Task<Ok<OutboxPageView>> GetOutbox(
+        EventDrivenOutboxStore outboxStore,
+        int limit = 50,
+        string? status = null,
+        string order = "desc",
+        DateTimeOffset? cursorCreatedAt = null,
+        Guid? cursorId = null,
+        CancellationToken ct = default)
+    {
+        var normalizedOrder = string.Equals(order, "asc", StringComparison.OrdinalIgnoreCase)
+            ? "asc"
+            : "desc";
+
+        var outbox = await outboxStore.GetOutboxMessagesAsync(
+            limit,
+            status,
+            normalizedOrder,
+            cursorCreatedAt,
+            cursorId,
+            ct);
+        return TypedResults.Ok(outbox);
     }
 }

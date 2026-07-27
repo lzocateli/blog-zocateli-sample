@@ -6,6 +6,9 @@ using BlogSamples.Messaging.TempoReal;
 using BlogSamples.Orchestration.Airflow;
 using BlogSamples.Produtos;
 using BlogSamples.Security.Cors;
+using Microsoft.Extensions.Options;
+using Npgsql;
+using Azure.Messaging.ServiceBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,6 +50,24 @@ builder.Services.AddCors(options =>
 
 builder.Services.AddSingleton<TempoRealProcessamentoService>();
 builder.Services.AddSignalR();
+
+// --- EventDriven com Outbox transacional (PostgreSQL + publisher separado) ---
+builder.Services.Configure<EventDrivenOptions>(
+    builder.Configuration.GetSection(EventDrivenOptions.SectionName));
+builder.Services.AddSingleton(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<EventDrivenOptions>>().Value;
+    return NpgsqlDataSource.Create(options.PostgresConnectionString);
+});
+builder.Services.AddSingleton(sp =>
+{
+    var options = sp.GetRequiredService<IOptions<EventDrivenOptions>>().Value;
+    return new ServiceBusClient(options.ServiceBusConnectionString);
+});
+builder.Services.AddSingleton<EventDrivenOutboxStore>();
+builder.Services.AddSingleton<IEventDrivenBrokerPublisher, ServiceBusEventDrivenPublisher>();
+builder.Services.AddHostedService<EventDrivenSchemaInitializer>();
+builder.Services.AddHostedService<OutboxPublisherWorker>();
 
 // --- Apache Airflow 3 API v2 ---
 builder.Services.AddAirflowClient(builder.Configuration);
