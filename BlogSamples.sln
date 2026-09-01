@@ -1,4 +1,4 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "blazor-wasm", "blazor-wasm"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlogSamples.BlazorWasm", "frontend\blazor-wasm\BlogSamples.BlazorWasm.csproj", "{CC44BA0B-3402-45BB-A157-241EB0CBEB7C}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlogSamples", "BlogSamples", "{257EC64F-DA9D-B102-AE5C-16EA7FA4F1D1}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{257EC64F-DA9D-B102-AE5C-16EA7FA4F1D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packaging", "Packaging", "{61D2AB95-18B8-2C26-2B3C-6911738674F8}"
 EndProject
