@@ -15,7 +15,7 @@
     <None Include="Scripting/DotnetRunSingleFile/**" />
 
     <!-- Projetos independentes aninhados não pertencem ao projeto web agregador. -->
-    <Compile Remove="NativeAot/CliExample/**;Packaging/NuGetPublish/Contoso.TextRules/**" />
+    <Compile Remove="NativeAot/CliExample/**;NativeAot/DecisionLab/**;Packaging/NuGetPublish/Contoso.TextRules/**" />
   </ItemGroup>
 
   <ItemGroup>

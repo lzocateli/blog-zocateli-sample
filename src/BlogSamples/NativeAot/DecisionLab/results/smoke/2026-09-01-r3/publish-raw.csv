@@ -1,0 +1,9 @@
+profile,category,repetition,duration_ms,uncompressed_bytes,compressed_bytes,succeeded,error
+"jit-fdd","clean",1,15295.092,165687,81471,True,""
+"jit-fdd","incremental",1,15381.603,165687,81471,True,""
+"jit-scd","clean",1,30118.128,109703386,48156909,True,""
+"jit-scd","incremental",1,16484.290,109703386,48156909,True,""
+"r2r-scd","clean",1,33277.178,109745882,48177185,True,""
+"r2r-scd","incremental",1,13659.287,109745882,48177185,True,""
+"native-aot","clean",1,109947.309,28306209,10865327,True,""
+"native-aot","incremental",1,12528.344,28306209,10865327,True,""

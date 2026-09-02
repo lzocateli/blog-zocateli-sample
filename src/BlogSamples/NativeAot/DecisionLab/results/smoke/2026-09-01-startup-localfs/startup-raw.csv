@@ -1,0 +1,9 @@
+profile,repetition,execution_order,duration_ms,succeeded,error
+"native-aot",1,1,98.773,True,""
+"r2r-scd",1,2,430.652,True,""
+"r2r-scd",2,3,455.095,True,""
+"jit-fdd",1,4,732.091,True,""
+"jit-scd",2,5,616.352,True,""
+"jit-fdd",2,6,475.807,True,""
+"native-aot",2,7,49.466,True,""
+"jit-scd",1,8,525.953,True,""

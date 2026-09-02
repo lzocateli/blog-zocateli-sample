@@ -1,0 +1,34 @@
+[
+  {
+    "Profile": "r2r-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 1,
+    "DurationMilliseconds": 10114.7509,
+    "Succeeded": false,
+    "Error": "The operation was canceled."
+  },
+  {
+    "Profile": "jit-fdd",
+    "Repetition": 1,
+    "ExecutionOrder": 2,
+    "DurationMilliseconds": 613.4427,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Repetition": 1,
+    "ExecutionOrder": 3,
+    "DurationMilliseconds": 1367.6032,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 4,
+    "DurationMilliseconds": 9278.7702,
+    "Succeeded": true,
+    "Error": null
+  }
+]

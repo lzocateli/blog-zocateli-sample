@@ -1,0 +1,11 @@
+profile,category,repetition,duration_ms,uncompressed_bytes,compressed_bytes,succeeded,error
+"jit-fdd","clean",1,19371.737,165687,81471,True,""
+"jit-fdd","incremental",1,9542.444,165687,81471,True,""
+"jit-scd","clean",1,24237.412,109703386,48156909,True,""
+"jit-scd","incremental",1,16133.473,109703386,48156909,True,""
+"r2r-scd","clean",1,0.000,0,0,False,"dotnet encerrou com código 1:
+/usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(444,5): error NETSDK1094: Unable to optimize assemblies for performance: a valid runtime package was not found. Either set the PublishReadyToRun property to false, or use a supported runtime identifier when publishing. When targeting .NET 6 or higher, make sure to restore packages with the PublishReadyToRun property set to true. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Api/DecisionLab.Api.csproj]"
+"r2r-scd","incremental",1,0.000,0,0,False,"dotnet encerrou com código 1:
+/usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(444,5): error NETSDK1094: Unable to optimize assemblies for performance: a valid runtime package was not found. Either set the PublishReadyToRun property to false, or use a supported runtime identifier when publishing. When targeting .NET 6 or higher, make sure to restore packages with the PublishReadyToRun property set to true. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Api/DecisionLab.Api.csproj]"
+"native-aot","clean",1,25085.962,109607885,48137513,True,""
+"native-aot","incremental",1,14623.957,109607885,48137513,True,""

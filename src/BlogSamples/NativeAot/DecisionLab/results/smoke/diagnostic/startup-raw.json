@@ -1,0 +1,34 @@
+[
+  {
+    "Profile": "r2r-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 1,
+    "DurationMilliseconds": 405.552,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Repetition": 1,
+    "ExecutionOrder": 2,
+    "DurationMilliseconds": 822.8142,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Repetition": 1,
+    "ExecutionOrder": 3,
+    "DurationMilliseconds": 67.8714,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 4,
+    "DurationMilliseconds": 631.2841,
+    "Succeeded": true,
+    "Error": null
+  }
+]

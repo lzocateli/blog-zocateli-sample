@@ -1,0 +1,27 @@
+{
+  "CrankVersion": "0.2.0-alpha.26316.1+b83cb6fee26a8da7e4ef1b3502a40e78fa2f1fb2",
+  "RandomSeed": 20260901,
+  "Profiles": [
+    "jit-fdd",
+    "jit-scd",
+    "r2r-scd",
+    "native-aot"
+  ],
+  "RepetitionsPerProfile": 5,
+  "Connections": 64,
+  "WarmupSeconds": 15,
+  "DurationSeconds": 30,
+  "Protocol": "HTTP/1.1",
+  "ApplicationAgent": "http://localhost:5010",
+  "LoadAgent": "http://localhost:5011",
+  "ServerAddressFromLoadAgent": "host.docker.internal:5000",
+  "Topology": "Aplicação e gerador em containers separados no mesmo host físico",
+  "PowerScheme": "Equilibrado (381b4222-f694-41f0-9685-ff5bb260df2e)",
+  "DockerDesktopVersion": "4.81.0 (232925)",
+  "DockerEngineVersion": "29.6.1",
+  "DockerKernelVersion": "5.15.167.4-microsoft-standard-WSL2",
+  "AgentRuntime": ".NET 8.0.30",
+  "ApplicationRuntime": ".NET 10.0.11",
+  "InvalidResponsePolicy": "Abortar a campanha se returnCode != 0 ou http/requests/badresponses != 0",
+  "Limitation": "O job Bombardier foi importado da branch main; a versão completa do pacote Crank está registrada em cada JSON bruto."
+}
