@@ -1,6 +1,6 @@
 # DecisionLab: JIT, ReadyToRun e Native AOT
 
-Laboratório reproduzível do artigo [.NET Native AOT: JIT, R2R e AOT em Benchmarks](https://zocate.li/posts/2026/dotnet-native-aot-jit-r2r-benchmarks/). O mesmo workload determinístico é usado pela Minimal API, pelo BenchmarkDotNet e pela carga HTTP.
+Laboratório reproduzível do artigo [.NET Native AOT: Parte 2 — JIT, R2R e AOT em Benchmarks](https://zocate.li/posts/2026/dotnet-native-aot-jit-r2r-benchmarks/). O mesmo workload determinístico é usado pela Minimal API, pelo BenchmarkDotNet e pela carga HTTP.
 
 ## O que é medido
 
