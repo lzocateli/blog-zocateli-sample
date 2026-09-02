@@ -13,7 +13,7 @@ namespace BlogSamples.Tests.AsyncParallel.ThreadSafety;
 public sealed class EstatisticasServiceTests
 {
     [Fact]
-    public void Registrar_Concorrente_MantemContagemCorretaPorChave()
+    public async Task Registrar_Concorrente_MantemContagemCorretaPorChave()
     {
         const int Threads = 32;
         const int Iteracoes = 25_000;
@@ -26,17 +26,21 @@ public sealed class EstatisticasServiceTests
         for (var i = 0; i < Threads; i++)
         {
             var indiceThread = i;
-            tarefas[i] = Task.Run(() =>
-            {
-                barreira.SignalAndWait();
-                for (var j = 0; j < Iteracoes; j++)
+            tarefas[i] = Task.Factory.StartNew(
+                () =>
                 {
-                    servico.Registrar(chaves[(indiceThread + j) % chaves.Length]);
-                }
-            });
+                    barreira.SignalAndWait();
+                    for (var j = 0; j < Iteracoes; j++)
+                    {
+                        servico.Registrar(chaves[(indiceThread + j) % chaves.Length]);
+                    }
+                },
+                CancellationToken.None,
+                TaskCreationOptions.LongRunning,
+                TaskScheduler.Default);
         }
 
-        Task.WaitAll(tarefas);
+        await Task.WhenAll(tarefas);
 
         var total = (long)Threads * Iteracoes;
         Assert.Equal(total, servico.Total());

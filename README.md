@@ -15,7 +15,7 @@ cd blog/sample/dotnet-blog-sample
 
 | Tecnologia | Versão | Obrigatório | Uso |
 |-----------|--------|-------------|-----|
-| [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) | **10.0.201+** (fixada via `global.json`) | Sim | Projeto principal, Blazor WASM e testes |
+| [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) | **10.0.400+** (fixada via `global.json`) | Sim | Projeto principal, Blazor WASM e testes |
 | [Node.js](https://nodejs.org/) | 22 LTS | Sim | Frontend Angular, Angular CLI |
 | [Angular CLI](https://angular.dev/) | 19+ | Sim | Projetos frontend Angular |
 | [Bun](https://bun.sh/) | latest | Não | Runtime alternativo (`search-ui-bun`) |
@@ -247,6 +247,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 21 | Orchestration | [Apache Airflow com .NET 10: dispare e monitore DAGs](https://zocate.li/posts/2026/apache-airflow-dotnet-10-api-dags/) | `src/BlogSamples/Orchestration/Airflow/` |
 | 22 | Messaging | [Arquitetura de Eventos sem Caos: Guia Prático](https://zocate.li/posts/2026/arquitetura-eventos-sem-caos/) | `src/BlogSamples/Messaging/EventDriven/` |
 | 23 | AsyncParallel | [Thread-Safety em .NET 10 vs Python: Concorrência, GIL e Race Conditions](https://zocate.li/posts/2026/thread-safety-dotnet-10-vs-python-gil-race-conditions/) | `src/BlogSamples/AsyncParallel/ThreadSafety/` |
+| 24 | NativeAot | [.NET Native AOT: JIT, R2R e AOT em Benchmarks](https://zocate.li/posts/2026/dotnet-native-aot-jit-r2r-benchmarks/) | `src/BlogSamples/NativeAot/DecisionLab/` |
 
 ## Estrutura do Projeto
 
@@ -273,6 +274,9 @@ BlogSamples.sln
 │   │   └── Cloud/                            # Circuit Breaker (Polly), Adapter anti-lock-in
 │   ├── Logging/                              # Logging estruturado, dinâmico, App Insights
 │   ├── Messaging/                            # RabbitMQ, Azure Service Bus, Batch insert
+│   ├── NativeAot/
+│   │   ├── CliExample/                       # CLI compilada com Native AOT
+│   │   └── DecisionLab/                      # API, benchmark e harness JIT/R2R/AOT
 │   ├── Orchestration/
 │   │   └── Airflow/                          # API v2, DAG e stack Docker persistente
 │   ├── Produtos/                             # API Produtos CRUD (Minimal API, in-memory)
@@ -307,7 +311,7 @@ BlogSamples.sln
 │   ├── fts-sqlserver-setup.sql               # Full-Text Search — SQL Server
 │   ├── fts-postgres-setup.sql                # Full-Text Search — PostgreSQL
 │   └── fts-oracle-setup.sql                  # Full-Text Search — Oracle Text
-└── global.json                               # .NET SDK 10.0.201+ fixado
+└── global.json                               # .NET SDK 10.0.400+ fixado
 ```
 
 ## Adicionando Exemplos de Novos Artigos
@@ -368,12 +372,12 @@ docker push lzocateli/aspnet:8.0.15-jammy-amd64
 
 > **Nota**: A versão do Runtime ASP.NET que acompanha o SDK 8.0.419 é a **8.0.15**. Verifique em [dotnet.microsoft.com/download/dotnet/8.0](https://dotnet.microsoft.com/download/dotnet/8.0) a correspondência exata de versões.
 
-### .NET SDK 10.0.201 (Noble)
+### .NET SDK 10.0.400 (Noble)
 
 ```bash
-docker pull mcr.microsoft.com/dotnet/sdk:10.0.201-noble
-docker tag mcr.microsoft.com/dotnet/sdk:10.0.201-noble lzocateli/dotnet-sdk:10.0.201-noble
-docker push lzocateli/dotnet-sdk:10.0.201-noble
+docker pull mcr.microsoft.com/dotnet/sdk:10.0.400-noble
+docker tag mcr.microsoft.com/dotnet/sdk:10.0.400-noble lzocateli/dotnet-sdk:10.0.400-noble
+docker push lzocateli/dotnet-sdk:10.0.400-noble
 ```
 
 ### ASP.NET Core Runtime 10.0.1 (Noble)
@@ -384,7 +388,7 @@ docker tag mcr.microsoft.com/dotnet/aspnet:10.0.1-noble lzocateli/aspnet:10.0.1-
 docker push lzocateli/aspnet:10.0.1-noble
 ```
 
-> **Nota**: A versão do Runtime ASP.NET que acompanha o SDK 10.0.201 é a **10.0.1**. Verifique em [dotnet.microsoft.com/download/dotnet/10.0](https://dotnet.microsoft.com/download/dotnet/10.0) a correspondência exata de versões. A imagem base mudou de **Jammy** (Ubuntu 22.04) para **Noble** (Ubuntu 24.04 LTS).
+> **Nota**: O SDK e o Runtime ASP.NET têm versionamento independente. Verifique em [dotnet.microsoft.com/download/dotnet/10.0](https://dotnet.microsoft.com/download/dotnet/10.0) a correspondência adequada antes de atualizar a imagem de runtime. A imagem base usa **Noble** (Ubuntu 24.04 LTS).
 
 ## Licença
 

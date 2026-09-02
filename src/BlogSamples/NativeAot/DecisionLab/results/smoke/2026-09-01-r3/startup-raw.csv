@@ -1,0 +1,5 @@
+profile,repetition,execution_order,duration_ms,succeeded,error
+"r2r-scd",1,1,10114.751,False,"The operation was canceled."
+"jit-fdd",1,2,613.443,True,""
+"native-aot",1,3,1367.603,True,""
+"jit-scd",1,4,9278.770,True,""

@@ -1,0 +1,66 @@
+[
+  {
+    "Profile": "native-aot",
+    "Repetition": 1,
+    "ExecutionOrder": 1,
+    "DurationMilliseconds": 98.7726,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 2,
+    "DurationMilliseconds": 430.6524,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Repetition": 2,
+    "ExecutionOrder": 3,
+    "DurationMilliseconds": 455.0947,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Repetition": 1,
+    "ExecutionOrder": 4,
+    "DurationMilliseconds": 732.0914,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Repetition": 2,
+    "ExecutionOrder": 5,
+    "DurationMilliseconds": 616.3521,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Repetition": 2,
+    "ExecutionOrder": 6,
+    "DurationMilliseconds": 475.8072,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Repetition": 2,
+    "ExecutionOrder": 7,
+    "DurationMilliseconds": 49.4664,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Repetition": 1,
+    "ExecutionOrder": 8,
+    "DurationMilliseconds": 525.9531,
+    "Succeeded": true,
+    "Error": null
+  }
+]

@@ -1,0 +1,395 @@
+// Validating benchmarks:
+// ***** BenchmarkRunner: Start   *****
+// ***** Found 2 benchmark(s) in total *****
+// ***** Building 2 exe(s) in Parallel: Start   *****
+// ***** Done, took 00:05:51 (351.29 sec)   *****
+// ***** Failed to build in Parallel, switching to sequential build   *****
+// ***** Done, took 00:05:38 (338.89 sec)   *****
+// Found 2 benchmarks:
+//   WorkloadBenchmarks.ProcessarCarga: .NET 10.0(Runtime=.NET 10.0)
+//   WorkloadBenchmarks.ProcessarCarga: NativeAOT 10.0(Runtime=NativeAOT 10.0)
+
+// **************************
+// Benchmark: WorkloadBenchmarks.ProcessarCarga: .NET 10.0(Runtime=.NET 10.0)
+// *** Execute ***
+// Launch: 1 / 1
+// Execute: dotnet "DecisionLab.Benchmarks-.NET 10.0-1.dll" --anonymousPipes 124 125 --benchmarkName BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks.ProcessarCarga --job ".NET 10.0" --benchmarkId 0 in /workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-.NET 10.0-1/bin/Release/net10.0
+// Failed to set up high priority (Permission denied). In order to run benchmarks with high priority, make sure you have the right permissions.
+// BeforeAnythingElse
+
+// Benchmark Process Environment Information:
+// BenchmarkDotNet v0.15.8
+// Runtime=.NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3
+// GC=Concurrent Workstation
+// HardwareIntrinsics=AVX2+BMI1+BMI2+F16C+FMA+LZCNT+MOVBE,AVX,SSE3+SSSE3+SSE4.1+SSE4.2+POPCNT,X86Base+SSE+SSE2,AES+PCLMUL,AvxVnni,SERIALIZE VectorSize=256
+// Job: .NET 10.0
+
+OverheadJitting  1: 1 op, 761284.00 ns, 761.2840 us/op
+WorkloadJitting  1: 1 op, 199414998.00 ns, 199.4150 ms/op
+
+WorkloadPilot    1: 2 op, 10009887.00 ns, 5.0049 ms/op
+WorkloadPilot    2: 3 op, 20941017.00 ns, 6.9803 ms/op
+WorkloadPilot    3: 4 op, 18829601.00 ns, 4.7074 ms/op
+WorkloadPilot    4: 5 op, 21200507.00 ns, 4.2401 ms/op
+WorkloadPilot    5: 6 op, 32860528.00 ns, 5.4768 ms/op
+WorkloadPilot    6: 7 op, 37368005.00 ns, 5.3383 ms/op
+WorkloadPilot    7: 8 op, 159159144.00 ns, 19.8949 ms/op
+WorkloadPilot    8: 9 op, 201272100.00 ns, 22.3636 ms/op
+WorkloadPilot    9: 10 op, 159724246.00 ns, 15.9724 ms/op
+WorkloadPilot   10: 11 op, 59455161.00 ns, 5.4050 ms/op
+WorkloadPilot   11: 12 op, 78941566.00 ns, 6.5785 ms/op
+WorkloadPilot   12: 13 op, 250225185.00 ns, 19.2481 ms/op
+WorkloadPilot   13: 14 op, 83188658.00 ns, 5.9420 ms/op
+WorkloadPilot   14: 15 op, 56038649.00 ns, 3.7359 ms/op
+WorkloadPilot   15: 16 op, 49616959.00 ns, 3.1011 ms/op
+WorkloadPilot   16: 32 op, 201651573.00 ns, 6.3016 ms/op
+WorkloadPilot   17: 64 op, 358419136.00 ns, 5.6003 ms/op
+WorkloadPilot   18: 128 op, 520013168.00 ns, 4.0626 ms/op
+
+WorkloadWarmup   1: 128 op, 762790125.00 ns, 5.9593 ms/op
+WorkloadWarmup   2: 128 op, 738903718.00 ns, 5.7727 ms/op
+WorkloadWarmup   3: 128 op, 854399186.00 ns, 6.6750 ms/op
+WorkloadWarmup   4: 128 op, 908139826.00 ns, 7.0948 ms/op
+WorkloadWarmup   5: 128 op, 896004827.00 ns, 7.0000 ms/op
+WorkloadWarmup   6: 128 op, 879457353.00 ns, 6.8708 ms/op
+WorkloadWarmup   7: 128 op, 762341305.00 ns, 5.9558 ms/op
+WorkloadWarmup   8: 128 op, 569193972.00 ns, 4.4468 ms/op
+WorkloadWarmup   9: 128 op, 524674006.00 ns, 4.0990 ms/op
+WorkloadWarmup  10: 128 op, 653178037.00 ns, 5.1030 ms/op
+WorkloadWarmup  11: 128 op, 557514749.00 ns, 4.3556 ms/op
+
+// BeforeActualRun
+WorkloadActual   1: 128 op, 554601826.00 ns, 4.3328 ms/op
+WorkloadActual   2: 128 op, 533152060.00 ns, 4.1653 ms/op
+WorkloadActual   3: 128 op, 729501711.00 ns, 5.6992 ms/op
+WorkloadActual   4: 128 op, 537080236.00 ns, 4.1959 ms/op
+WorkloadActual   5: 128 op, 498224736.00 ns, 3.8924 ms/op
+WorkloadActual   6: 128 op, 453023150.00 ns, 3.5392 ms/op
+WorkloadActual   7: 128 op, 592577491.00 ns, 4.6295 ms/op
+WorkloadActual   8: 128 op, 435240182.00 ns, 3.4003 ms/op
+WorkloadActual   9: 128 op, 599178652.00 ns, 4.6811 ms/op
+WorkloadActual  10: 128 op, 556293327.00 ns, 4.3460 ms/op
+WorkloadActual  11: 128 op, 387342501.00 ns, 3.0261 ms/op
+WorkloadActual  12: 128 op, 364985995.00 ns, 2.8515 ms/op
+WorkloadActual  13: 128 op, 314231776.00 ns, 2.4549 ms/op
+WorkloadActual  14: 128 op, 273368514.00 ns, 2.1357 ms/op
+WorkloadActual  15: 128 op, 234226384.00 ns, 1.8299 ms/op
+WorkloadActual  16: 128 op, 220265528.00 ns, 1.7208 ms/op
+WorkloadActual  17: 128 op, 302965481.00 ns, 2.3669 ms/op
+WorkloadActual  18: 128 op, 314944603.00 ns, 2.4605 ms/op
+WorkloadActual  19: 128 op, 275922453.00 ns, 2.1556 ms/op
+WorkloadActual  20: 128 op, 249380007.00 ns, 1.9483 ms/op
+WorkloadActual  21: 128 op, 261586235.00 ns, 2.0436 ms/op
+WorkloadActual  22: 128 op, 327889641.00 ns, 2.5616 ms/op
+WorkloadActual  23: 128 op, 428707662.00 ns, 3.3493 ms/op
+WorkloadActual  24: 128 op, 285177915.00 ns, 2.2280 ms/op
+WorkloadActual  25: 128 op, 300740168.00 ns, 2.3495 ms/op
+WorkloadActual  26: 128 op, 264829861.00 ns, 2.0690 ms/op
+WorkloadActual  27: 128 op, 224045680.00 ns, 1.7504 ms/op
+WorkloadActual  28: 128 op, 421656119.00 ns, 3.2942 ms/op
+WorkloadActual  29: 128 op, 331209133.00 ns, 2.5876 ms/op
+WorkloadActual  30: 128 op, 403675639.00 ns, 3.1537 ms/op
+WorkloadActual  31: 128 op, 542690748.00 ns, 4.2398 ms/op
+WorkloadActual  32: 128 op, 538235650.00 ns, 4.2050 ms/op
+WorkloadActual  33: 128 op, 512305915.00 ns, 4.0024 ms/op
+WorkloadActual  34: 128 op, 439712322.00 ns, 3.4353 ms/op
+WorkloadActual  35: 128 op, 418103435.00 ns, 3.2664 ms/op
+WorkloadActual  36: 128 op, 287368540.00 ns, 2.2451 ms/op
+WorkloadActual  37: 128 op, 270649430.00 ns, 2.1144 ms/op
+WorkloadActual  38: 128 op, 307617075.00 ns, 2.4033 ms/op
+WorkloadActual  39: 128 op, 349806245.00 ns, 2.7329 ms/op
+WorkloadActual  40: 128 op, 327875400.00 ns, 2.5615 ms/op
+WorkloadActual  41: 128 op, 282139409.00 ns, 2.2042 ms/op
+WorkloadActual  42: 128 op, 224737249.00 ns, 1.7558 ms/op
+WorkloadActual  43: 128 op, 206361742.00 ns, 1.6122 ms/op
+WorkloadActual  44: 128 op, 210017719.00 ns, 1.6408 ms/op
+WorkloadActual  45: 128 op, 233715189.00 ns, 1.8259 ms/op
+WorkloadActual  46: 128 op, 229005074.00 ns, 1.7891 ms/op
+WorkloadActual  47: 128 op, 277799791.00 ns, 2.1703 ms/op
+WorkloadActual  48: 128 op, 348057383.00 ns, 2.7192 ms/op
+WorkloadActual  49: 128 op, 372410517.00 ns, 2.9095 ms/op
+WorkloadActual  50: 128 op, 334192630.00 ns, 2.6109 ms/op
+WorkloadActual  51: 128 op, 347511373.00 ns, 2.7149 ms/op
+WorkloadActual  52: 128 op, 315207021.00 ns, 2.4626 ms/op
+WorkloadActual  53: 128 op, 289629124.00 ns, 2.2627 ms/op
+WorkloadActual  54: 128 op, 293190848.00 ns, 2.2906 ms/op
+WorkloadActual  55: 128 op, 332675565.00 ns, 2.5990 ms/op
+WorkloadActual  56: 128 op, 367483072.00 ns, 2.8710 ms/op
+WorkloadActual  57: 128 op, 341870989.00 ns, 2.6709 ms/op
+WorkloadActual  58: 128 op, 437959974.00 ns, 3.4216 ms/op
+WorkloadActual  59: 128 op, 494993004.00 ns, 3.8671 ms/op
+WorkloadActual  60: 128 op, 306425656.00 ns, 2.3940 ms/op
+WorkloadActual  61: 128 op, 269985104.00 ns, 2.1093 ms/op
+WorkloadActual  62: 128 op, 596160211.00 ns, 4.6575 ms/op
+WorkloadActual  63: 128 op, 582283626.00 ns, 4.5491 ms/op
+WorkloadActual  64: 128 op, 549536850.00 ns, 4.2933 ms/op
+WorkloadActual  65: 128 op, 410837833.00 ns, 3.2097 ms/op
+WorkloadActual  66: 128 op, 572876771.00 ns, 4.4756 ms/op
+WorkloadActual  67: 128 op, 530057834.00 ns, 4.1411 ms/op
+WorkloadActual  68: 128 op, 545645451.00 ns, 4.2629 ms/op
+WorkloadActual  69: 128 op, 406930145.00 ns, 3.1791 ms/op
+WorkloadActual  70: 128 op, 361043936.00 ns, 2.8207 ms/op
+WorkloadActual  71: 128 op, 341697815.00 ns, 2.6695 ms/op
+WorkloadActual  72: 128 op, 327440909.00 ns, 2.5581 ms/op
+WorkloadActual  73: 128 op, 296859305.00 ns, 2.3192 ms/op
+WorkloadActual  74: 128 op, 441885843.00 ns, 3.4522 ms/op
+WorkloadActual  75: 128 op, 403727865.00 ns, 3.1541 ms/op
+WorkloadActual  76: 128 op, 440143184.00 ns, 3.4386 ms/op
+WorkloadActual  77: 128 op, 405891840.00 ns, 3.1710 ms/op
+WorkloadActual  78: 128 op, 365607507.00 ns, 2.8563 ms/op
+WorkloadActual  79: 128 op, 479767803.00 ns, 3.7482 ms/op
+WorkloadActual  80: 128 op, 381604912.00 ns, 2.9813 ms/op
+WorkloadActual  81: 128 op, 337821402.00 ns, 2.6392 ms/op
+WorkloadActual  82: 128 op, 248354409.00 ns, 1.9403 ms/op
+WorkloadActual  83: 128 op, 286409244.00 ns, 2.2376 ms/op
+WorkloadActual  84: 128 op, 342764835.00 ns, 2.6779 ms/op
+WorkloadActual  85: 128 op, 305347042.00 ns, 2.3855 ms/op
+WorkloadActual  86: 128 op, 252491335.00 ns, 1.9726 ms/op
+WorkloadActual  87: 128 op, 284904711.00 ns, 2.2258 ms/op
+WorkloadActual  88: 128 op, 285476152.00 ns, 2.2303 ms/op
+WorkloadActual  89: 128 op, 369851782.00 ns, 2.8895 ms/op
+WorkloadActual  90: 128 op, 362400331.00 ns, 2.8313 ms/op
+WorkloadActual  91: 128 op, 405392821.00 ns, 3.1671 ms/op
+WorkloadActual  92: 128 op, 420237866.00 ns, 3.2831 ms/op
+WorkloadActual  93: 128 op, 388902262.00 ns, 3.0383 ms/op
+WorkloadActual  94: 128 op, 381256623.00 ns, 2.9786 ms/op
+WorkloadActual  95: 128 op, 382317732.00 ns, 2.9869 ms/op
+WorkloadActual  96: 128 op, 361729472.00 ns, 2.8260 ms/op
+WorkloadActual  97: 128 op, 400822261.00 ns, 3.1314 ms/op
+WorkloadActual  98: 128 op, 362796134.00 ns, 2.8343 ms/op
+WorkloadActual  99: 128 op, 384001590.00 ns, 3.0000 ms/op
+WorkloadActual  100: 128 op, 456723844.00 ns, 3.5682 ms/op
+
+// AfterActualRun
+WorkloadResult   1: 128 op, 554601826.00 ns, 4.3328 ms/op
+WorkloadResult   2: 128 op, 533152060.00 ns, 4.1653 ms/op
+WorkloadResult   3: 128 op, 537080236.00 ns, 4.1959 ms/op
+WorkloadResult   4: 128 op, 498224736.00 ns, 3.8924 ms/op
+WorkloadResult   5: 128 op, 453023150.00 ns, 3.5392 ms/op
+WorkloadResult   6: 128 op, 592577491.00 ns, 4.6295 ms/op
+WorkloadResult   7: 128 op, 435240182.00 ns, 3.4003 ms/op
+WorkloadResult   8: 128 op, 599178652.00 ns, 4.6811 ms/op
+WorkloadResult   9: 128 op, 556293327.00 ns, 4.3460 ms/op
+WorkloadResult  10: 128 op, 387342501.00 ns, 3.0261 ms/op
+WorkloadResult  11: 128 op, 364985995.00 ns, 2.8515 ms/op
+WorkloadResult  12: 128 op, 314231776.00 ns, 2.4549 ms/op
+WorkloadResult  13: 128 op, 273368514.00 ns, 2.1357 ms/op
+WorkloadResult  14: 128 op, 234226384.00 ns, 1.8299 ms/op
+WorkloadResult  15: 128 op, 220265528.00 ns, 1.7208 ms/op
+WorkloadResult  16: 128 op, 302965481.00 ns, 2.3669 ms/op
+WorkloadResult  17: 128 op, 314944603.00 ns, 2.4605 ms/op
+WorkloadResult  18: 128 op, 275922453.00 ns, 2.1556 ms/op
+WorkloadResult  19: 128 op, 249380007.00 ns, 1.9483 ms/op
+WorkloadResult  20: 128 op, 261586235.00 ns, 2.0436 ms/op
+WorkloadResult  21: 128 op, 327889641.00 ns, 2.5616 ms/op
+WorkloadResult  22: 128 op, 428707662.00 ns, 3.3493 ms/op
+WorkloadResult  23: 128 op, 285177915.00 ns, 2.2280 ms/op
+WorkloadResult  24: 128 op, 300740168.00 ns, 2.3495 ms/op
+WorkloadResult  25: 128 op, 264829861.00 ns, 2.0690 ms/op
+WorkloadResult  26: 128 op, 224045680.00 ns, 1.7504 ms/op
+WorkloadResult  27: 128 op, 421656119.00 ns, 3.2942 ms/op
+WorkloadResult  28: 128 op, 331209133.00 ns, 2.5876 ms/op
+WorkloadResult  29: 128 op, 403675639.00 ns, 3.1537 ms/op
+WorkloadResult  30: 128 op, 542690748.00 ns, 4.2398 ms/op
+WorkloadResult  31: 128 op, 538235650.00 ns, 4.2050 ms/op
+WorkloadResult  32: 128 op, 512305915.00 ns, 4.0024 ms/op
+WorkloadResult  33: 128 op, 439712322.00 ns, 3.4353 ms/op
+WorkloadResult  34: 128 op, 418103435.00 ns, 3.2664 ms/op
+WorkloadResult  35: 128 op, 287368540.00 ns, 2.2451 ms/op
+WorkloadResult  36: 128 op, 270649430.00 ns, 2.1144 ms/op
+WorkloadResult  37: 128 op, 307617075.00 ns, 2.4033 ms/op
+WorkloadResult  38: 128 op, 349806245.00 ns, 2.7329 ms/op
+WorkloadResult  39: 128 op, 327875400.00 ns, 2.5615 ms/op
+WorkloadResult  40: 128 op, 282139409.00 ns, 2.2042 ms/op
+WorkloadResult  41: 128 op, 224737249.00 ns, 1.7558 ms/op
+WorkloadResult  42: 128 op, 206361742.00 ns, 1.6122 ms/op
+WorkloadResult  43: 128 op, 210017719.00 ns, 1.6408 ms/op
+WorkloadResult  44: 128 op, 233715189.00 ns, 1.8259 ms/op
+WorkloadResult  45: 128 op, 229005074.00 ns, 1.7891 ms/op
+WorkloadResult  46: 128 op, 277799791.00 ns, 2.1703 ms/op
+WorkloadResult  47: 128 op, 348057383.00 ns, 2.7192 ms/op
+WorkloadResult  48: 128 op, 372410517.00 ns, 2.9095 ms/op
+WorkloadResult  49: 128 op, 334192630.00 ns, 2.6109 ms/op
+WorkloadResult  50: 128 op, 347511373.00 ns, 2.7149 ms/op
+WorkloadResult  51: 128 op, 315207021.00 ns, 2.4626 ms/op
+WorkloadResult  52: 128 op, 289629124.00 ns, 2.2627 ms/op
+WorkloadResult  53: 128 op, 293190848.00 ns, 2.2906 ms/op
+WorkloadResult  54: 128 op, 332675565.00 ns, 2.5990 ms/op
+WorkloadResult  55: 128 op, 367483072.00 ns, 2.8710 ms/op
+WorkloadResult  56: 128 op, 341870989.00 ns, 2.6709 ms/op
+WorkloadResult  57: 128 op, 437959974.00 ns, 3.4216 ms/op
+WorkloadResult  58: 128 op, 494993004.00 ns, 3.8671 ms/op
+WorkloadResult  59: 128 op, 306425656.00 ns, 2.3940 ms/op
+WorkloadResult  60: 128 op, 269985104.00 ns, 2.1093 ms/op
+WorkloadResult  61: 128 op, 596160211.00 ns, 4.6575 ms/op
+WorkloadResult  62: 128 op, 582283626.00 ns, 4.5491 ms/op
+WorkloadResult  63: 128 op, 549536850.00 ns, 4.2933 ms/op
+WorkloadResult  64: 128 op, 410837833.00 ns, 3.2097 ms/op
+WorkloadResult  65: 128 op, 572876771.00 ns, 4.4756 ms/op
+WorkloadResult  66: 128 op, 530057834.00 ns, 4.1411 ms/op
+WorkloadResult  67: 128 op, 545645451.00 ns, 4.2629 ms/op
+WorkloadResult  68: 128 op, 406930145.00 ns, 3.1791 ms/op
+WorkloadResult  69: 128 op, 361043936.00 ns, 2.8207 ms/op
+WorkloadResult  70: 128 op, 341697815.00 ns, 2.6695 ms/op
+WorkloadResult  71: 128 op, 327440909.00 ns, 2.5581 ms/op
+WorkloadResult  72: 128 op, 296859305.00 ns, 2.3192 ms/op
+WorkloadResult  73: 128 op, 441885843.00 ns, 3.4522 ms/op
+WorkloadResult  74: 128 op, 403727865.00 ns, 3.1541 ms/op
+WorkloadResult  75: 128 op, 440143184.00 ns, 3.4386 ms/op
+WorkloadResult  76: 128 op, 405891840.00 ns, 3.1710 ms/op
+WorkloadResult  77: 128 op, 365607507.00 ns, 2.8563 ms/op
+WorkloadResult  78: 128 op, 479767803.00 ns, 3.7482 ms/op
+WorkloadResult  79: 128 op, 381604912.00 ns, 2.9813 ms/op
+WorkloadResult  80: 128 op, 337821402.00 ns, 2.6392 ms/op
+WorkloadResult  81: 128 op, 248354409.00 ns, 1.9403 ms/op
+WorkloadResult  82: 128 op, 286409244.00 ns, 2.2376 ms/op
+WorkloadResult  83: 128 op, 342764835.00 ns, 2.6779 ms/op
+WorkloadResult  84: 128 op, 305347042.00 ns, 2.3855 ms/op
+WorkloadResult  85: 128 op, 252491335.00 ns, 1.9726 ms/op
+WorkloadResult  86: 128 op, 284904711.00 ns, 2.2258 ms/op
+WorkloadResult  87: 128 op, 285476152.00 ns, 2.2303 ms/op
+WorkloadResult  88: 128 op, 369851782.00 ns, 2.8895 ms/op
+WorkloadResult  89: 128 op, 362400331.00 ns, 2.8313 ms/op
+WorkloadResult  90: 128 op, 405392821.00 ns, 3.1671 ms/op
+WorkloadResult  91: 128 op, 420237866.00 ns, 3.2831 ms/op
+WorkloadResult  92: 128 op, 388902262.00 ns, 3.0383 ms/op
+WorkloadResult  93: 128 op, 381256623.00 ns, 2.9786 ms/op
+WorkloadResult  94: 128 op, 382317732.00 ns, 2.9869 ms/op
+WorkloadResult  95: 128 op, 361729472.00 ns, 2.8260 ms/op
+WorkloadResult  96: 128 op, 400822261.00 ns, 3.1314 ms/op
+WorkloadResult  97: 128 op, 362796134.00 ns, 2.8343 ms/op
+WorkloadResult  98: 128 op, 384001590.00 ns, 3.0000 ms/op
+WorkloadResult  99: 128 op, 456723844.00 ns, 3.5682 ms/op
+// GC:  0 0 0 1149952 128
+// Threading:  0 0 128
+
+// AfterAll
+// Benchmark Process 920 has exited with code 0.
+
+Mean = 2.913 ms, StdErr = 0.080 ms (2.76%), N = 99, StdDev = 0.799 ms
+Min = 1.612 ms, Q1 = 2.277 ms, Median = 2.826 ms, Q3 = 3.375 ms, Max = 4.681 ms
+IQR = 1.098 ms, LowerFence = 0.629 ms, UpperFence = 5.022 ms
+ConfidenceInterval = [2.641 ms; 3.186 ms] (CI 99.9%), Margin = 0.272 ms (9.35% of Mean)
+Skewness = 0.54, Kurtosis = 2.41, MValue = 2.77
+
+// ** Remained 1 (50.0 %) benchmark(s) to run. Estimated finish 2026-09-02 0:15 (0h 0m from now) **
+// Build Error: Standard output: 
+   DecisionLab.Workload -> /workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/bin/Release/net10.0/linux-x64/publish/DecisionLab.Workload.dll
+  DecisionLab.Benchmarks -> /workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/bin/Release/net10.0/linux-x64/publish/DecisionLab.Benchmarks.dll
+  BenchmarkDotNet.Autogenerated -> /workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/bin/Release/net10.0/linux-x64/publish/DecisionLab.Benchmarks-NativeAOT 10.0-2.dll
+/root/.nuget/packages/microsoft.net.illink.tasks/10.0.11/build/Microsoft.NET.ILLink.targets(227,5): warning : Property 'TrimmerDefaultAction' is deprecated in .NET 7 and higher and will be ignored. Use TrimMode instead. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+  Generating native code
+ILC : warning IL3000: BenchmarkDotNet.Environments.CoreRuntime.TryGetVersion(Version&): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Portability.RuntimeInformation.<GetNetCoreVersion>g__GetDetailedVersion|17_0(RuntimeInformation.<>c__DisplayClass17_0&): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/benchmarkdotnet/0.15.8/lib/net8.0/BenchmarkDotNet.dll : warning IL2104: Assembly 'BenchmarkDotNet' produced trim warnings. For more information see https://aka.ms/il2104 [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/commandlineparser/2.9.1/lib/netstandard2.0/CommandLine.dll : warning IL2104: Assembly 'CommandLine' produced trim warnings. For more information see https://aka.ms/il2104 [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Running.BenchmarkPartitioner.BenchmarkRuntimePropertiesComparer.Equals(BenchmarkCase,BenchmarkCase): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Running.BenchmarkPartitioner.BenchmarkRuntimePropertiesComparer.Equals(BenchmarkCase,BenchmarkCase): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Running.BenchmarkPartitioner.BenchmarkRuntimePropertiesComparer.GetHashCode(BenchmarkCase): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Validators.ShadowCopyValidator.<>c.<Validate>b__4_1(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/benchmarkdotnet/0.15.8/lib/net8.0/BenchmarkDotNet.dll : warning IL3053: Assembly 'BenchmarkDotNet' produced AOT analysis warnings. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Disassemblers.MonoDisassembler.Disassemble(BenchmarkCase,MonoRuntime): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Running.BuildPartition.GetResolvedAssemblyLocation(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Running.BuildPartition.GetResolvedAssemblyLocation(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Toolchains.Roslyn.Generator.<>c.<GenerateBuildScript>b__2_0(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Toolchains.CsProj.CsProjGenerator.GetBuildArtifactsDirectoryPath(BuildPartition,String): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Code.CodeGenerator.GetShadowCopySettings(): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Toolchains.Roslyn.Builder.GetFrameworkAssembliesPaths(): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Toolchains.Roslyn.Builder.<>c.<Build>b__4_0(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3000: BenchmarkDotNet.Toolchains.Roslyn.Builder.<>c.<GetMissingReferences>b__9_4(Assembly): 'System.Reflection.Assembly.Location.get' always returns an empty string for assemblies embedded in a single-file app. If the path to the app directory is needed, consider calling 'System.AppContext.BaseDirectory'. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/microsoft.diagnostics.tracing.traceevent/3.1.21/lib/netstandard2.0/Microsoft.Diagnostics.Tracing.TraceEvent.dll : warning IL3053: Assembly 'Microsoft.Diagnostics.Tracing.TraceEvent' produced AOT analysis warnings. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/microsoft.diagnostics.tracing.traceevent/3.1.21/lib/netstandard2.0/Microsoft.Diagnostics.FastSerialization.dll : warning IL2104: Assembly 'Microsoft.Diagnostics.FastSerialization' produced trim warnings. For more information see https://aka.ms/il2104 [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/microsoft.diagnostics.tracing.traceevent/3.1.21/lib/netstandard2.0/Microsoft.Diagnostics.Tracing.TraceEvent.dll : warning IL2104: Assembly 'Microsoft.Diagnostics.Tracing.TraceEvent' produced trim warnings. For more information see https://aka.ms/il2104 [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3002: Microsoft.Diagnostics.Symbols.NativeSymbolModule.MicrosoftPdbSourceFile.GetSourceFromSrcServer(): Using member 'System.Reflection.Module.FullyQualifiedName.get' which has 'RequiresAssemblyFilesAttribute' can break functionality when embedded in a single-file app. Returns <Unknown> for modules with no file path. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/microsoft.codeanalysis.common/4.14.0/lib/net9.0/Microsoft.CodeAnalysis.dll : warning IL2104: Assembly 'Microsoft.CodeAnalysis' produced trim warnings. For more information see https://aka.ms/il2104 [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+/root/.nuget/packages/gee.external.capstone/2.3.0/lib/net7.0/Gee.External.Capstone.dll : warning IL3053: Assembly 'Gee.External.Capstone' produced AOT analysis warnings. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj]
+ILC : warning IL3002: NativeDlls.LoadNative(String): Using member 'System.Reflection.Module.FullyQualifiedName.get' which has 'RequiresAssemblyFilesAttribute' can break functionality when embedded in a single-file app. Returns <Unknown> for modules with no file path. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2/BenchmarkDotNet.Autogenerated.csproj] 
+ Standard error: 
+ The configured timeout 00:05:00 was reached!
+
+// BenchmarkDotNet has failed to build the auto-generated boilerplate code.
+// It can be found in /workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Benchmarks/bin/Release/net10.0/DecisionLab.Benchmarks-NativeAOT 10.0-2
+// Please follow the troubleshooting guide: https://benchmarkdotnet.org/articles/guides/troubleshooting.html
+
+// ** Remained 0 (0.0 %) benchmark(s) to run. Estimated finish 2026-09-02 0:14 (0h 0m from now) **
+// ***** BenchmarkRunner: Finish  *****
+
+// * Export *
+  src/BlogSamples/NativeAot/DecisionLab/results/docker-desktop-i5-1245u/2026-09-01/benchmarkdotnet/results/BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks-report.csv
+  src/BlogSamples/NativeAot/DecisionLab/results/docker-desktop-i5-1245u/2026-09-01/benchmarkdotnet/results/BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks-report-github.md
+  src/BlogSamples/NativeAot/DecisionLab/results/docker-desktop-i5-1245u/2026-09-01/benchmarkdotnet/results/BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks-report.html
+  src/BlogSamples/NativeAot/DecisionLab/results/docker-desktop-i5-1245u/2026-09-01/benchmarkdotnet/results/BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks-report-default.md
+  src/BlogSamples/NativeAot/DecisionLab/results/docker-desktop-i5-1245u/2026-09-01/benchmarkdotnet/results/BlogSamples.NativeAot.DecisionLab.Benchmarks.WorkloadBenchmarks-report-full.json
+
+// * Detailed results *
+WorkloadBenchmarks.ProcessarCarga: .NET 10.0(Runtime=.NET 10.0)
+Runtime = .NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3; GC = Concurrent Workstation
+Mean = 2.913 ms, StdErr = 0.080 ms (2.76%), N = 99, StdDev = 0.799 ms
+Min = 1.612 ms, Q1 = 2.277 ms, Median = 2.826 ms, Q3 = 3.375 ms, Max = 4.681 ms
+IQR = 1.098 ms, LowerFence = 0.629 ms, UpperFence = 5.022 ms
+ConfidenceInterval = [2.641 ms; 3.186 ms] (CI 99.9%), Margin = 0.272 ms (9.35% of Mean)
+Skewness = 0.54, Kurtosis = 2.41, MValue = 2.77
+-------------------- Histogram --------------------
+[1.566 ms ; 2.026 ms) | @@@@@@@@@@@
+[2.026 ms ; 2.552 ms) | @@@@@@@@@@@@@@@@@@@@@@@@
+[2.552 ms ; 3.006 ms) | @@@@@@@@@@@@@@@@@@@@@@@@@@
+[3.006 ms ; 3.466 ms) | @@@@@@@@@@@@@@@@@@
+[3.466 ms ; 3.942 ms) | @@@@@
+[3.942 ms ; 4.118 ms) | @
+[4.118 ms ; 4.572 ms) | @@@@@@@@@@@
+[4.572 ms ; 4.908 ms) | @@@
+---------------------------------------------------
+
+WorkloadBenchmarks.ProcessarCarga: NativeAOT 10.0(Runtime=NativeAOT 10.0)
+Runtime = ; GC = 
+There are not any results runs
+
+// * Summary *
+
+BenchmarkDotNet v0.15.8, Linux Ubuntu 24.04.4 LTS (Noble Numbat) (container)
+12th Gen Intel Core i5-1245U 2.50GHz, 1 CPU, 12 logical and 6 physical cores
+.NET SDK 10.0.400
+  [Host]    : .NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3
+  .NET 10.0 : .NET 10.0.11 (10.0.11, 10.0.1126.37416), X64 RyuJIT x86-64-v3
+
+
+| Method         | Job            | Runtime        | Mean     | Error     | StdDev    | Ratio | RatioSD | Allocated | Alloc Ratio |
+|--------------- |--------------- |--------------- |---------:|----------:|----------:|------:|--------:|----------:|------------:|
+| ProcessarCarga | .NET 10.0      | .NET 10.0      | 2.913 ms | 0.2724 ms | 0.7990 ms |  1.08 |    0.42 |   8.77 KB |        1.00 |
+| ProcessarCarga | NativeAOT 10.0 | NativeAOT 10.0 |       NA |        NA |        NA |     ? |       ? |        NA |           ? |
+
+Benchmarks with issues:
+  WorkloadBenchmarks.ProcessarCarga: NativeAOT 10.0(Runtime=NativeAOT 10.0)
+
+// * Warnings *
+BaselineCustomAnalyzer
+  Summary -> A question mark '?' symbol indicates that it was not possible to compute the (Ratio, RatioSD, Alloc Ratio) column(s) because the baseline or benchmark could not be found, or the baseline value is too close to zero.
+
+// * Hints *
+Outliers
+  WorkloadBenchmarks.ProcessarCarga: .NET 10.0 -> 1 outlier  was  removed (5.70 ms)
+// * Config Issues *
+
+// * Warnings *
+Configuration
+  Summary -> The exporter CsvExporter is already present in configuration. There may be unexpected results.
+
+// * Legends *
+  Mean        : Arithmetic mean of all measurements
+  Error       : Half of 99.9% confidence interval
+  StdDev      : Standard deviation of all measurements
+  Ratio       : Mean of the ratio distribution ([Current]/[Baseline])
+  RatioSD     : Standard deviation of the ratio distribution ([Current]/[Baseline])
+  Allocated   : Allocated memory per single operation (managed only, inclusive, 1KB = 1024B)
+  Alloc Ratio : Allocated memory ratio distribution ([Current]/[Baseline])
+  1 ms        : 1 Millisecond (0.001 sec)
+
+// * Diagnostic Output - MemoryDiagnoser *
+
+
+// ***** BenchmarkRunner: End *****
+Run time: 00:00:53 (53.61 sec), executed benchmarks: 1
+
+Global total time: 00:12:25 (745.57 sec), executed benchmarks: 1
+// * Artifacts cleanup *
+Artifacts cleanup is finished

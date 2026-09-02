@@ -1,0 +1,51 @@
+imports:
+  - https://raw.githubusercontent.com/dotnet/crank/main/src/Microsoft.Crank.Jobs.Bombardier/bombardier.yml
+
+variables:
+  profile: jit-fdd
+  executable: dotnet
+  applicationArguments: src/BlogSamples/NativeAot/DecisionLab/artifacts/publish/jit-fdd/DecisionLab.Api.dll
+
+jobs:
+  server:
+    executable: "{{ executable }}"
+    arguments: "{{ applicationArguments }}"
+    workingDirectory: /workspace
+    readyStateText: Application started.
+    environmentVariables:
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://0.0.0.0:5000
+      DOTNET_NOLOGO: "1"
+
+scenarios:
+  workload:
+    application:
+      job: server
+    load:
+      job: bombardier
+      variables:
+        serverPort: 5000
+        path: /work
+        verb: POST
+        presetHeaders: json
+        customHeaders:
+          - "content-type: application/json"
+        body: '{\"seed\":42,\"itemCount\":2048,\"iterations\":8}'
+        connections: 64
+        warmup: 15
+        duration: 30
+        requests: 0
+        timeout: 10
+        transport: http1
+
+profiles:
+  local:
+    variables:
+      serverAddress: host.docker.internal
+    jobs:
+      application:
+        endpoints:
+          - http://localhost:5010
+      load:
+        endpoints:
+          - http://localhost:5011

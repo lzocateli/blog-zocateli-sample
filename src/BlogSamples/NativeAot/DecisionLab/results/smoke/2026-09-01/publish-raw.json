@@ -1,0 +1,82 @@
+[
+  {
+    "Profile": "jit-fdd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 19371.7374,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 9542.4436,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 24237.4119,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 16133.4726,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 0,
+    "UncompressedBytes": 0,
+    "CompressedBytes": 0,
+    "Succeeded": false,
+    "Error": "dotnet encerrou com c\u00F3digo 1:\n/usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(444,5): error NETSDK1094: Unable to optimize assemblies for performance: a valid runtime package was not found. Either set the PublishReadyToRun property to false, or use a supported runtime identifier when publishing. When targeting .NET 6 or higher, make sure to restore packages with the PublishReadyToRun property set to true. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Api/DecisionLab.Api.csproj]"
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 0,
+    "UncompressedBytes": 0,
+    "CompressedBytes": 0,
+    "Succeeded": false,
+    "Error": "dotnet encerrou com c\u00F3digo 1:\n/usr/share/dotnet/sdk/10.0.400/Sdks/Microsoft.NET.Sdk/targets/Microsoft.NET.Publish.targets(444,5): error NETSDK1094: Unable to optimize assemblies for performance: a valid runtime package was not found. Either set the PublishReadyToRun property to false, or use a supported runtime identifier when publishing. When targeting .NET 6 or higher, make sure to restore packages with the PublishReadyToRun property set to true. [/workspace/src/BlogSamples/NativeAot/DecisionLab/DecisionLab.Api/DecisionLab.Api.csproj]"
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 25085.9617,
+    "UncompressedBytes": 109607885,
+    "CompressedBytes": 48137513,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 14623.9568,
+    "UncompressedBytes": 109607885,
+    "CompressedBytes": 48137513,
+    "Succeeded": true,
+    "Error": null
+  }
+]

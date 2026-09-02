@@ -1,0 +1,242 @@
+[
+  {
+    "Profile": "jit-fdd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 17827.431,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 11507.0151,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "clean",
+    "Repetition": 2,
+    "DurationMilliseconds": 11589.0687,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "incremental",
+    "Repetition": 2,
+    "DurationMilliseconds": 11678.753,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "clean",
+    "Repetition": 3,
+    "DurationMilliseconds": 9568.4207,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-fdd",
+    "Category": "incremental",
+    "Repetition": 3,
+    "DurationMilliseconds": 12210.9032,
+    "UncompressedBytes": 165687,
+    "CompressedBytes": 81471,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 25258.5831,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 13551.9361,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "clean",
+    "Repetition": 2,
+    "DurationMilliseconds": 28450.4051,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "incremental",
+    "Repetition": 2,
+    "DurationMilliseconds": 16853.6323,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "clean",
+    "Repetition": 3,
+    "DurationMilliseconds": 28524.6324,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "jit-scd",
+    "Category": "incremental",
+    "Repetition": 3,
+    "DurationMilliseconds": 14551.6871,
+    "UncompressedBytes": 109703386,
+    "CompressedBytes": 48156909,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 25812.3696,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 14695.8606,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "clean",
+    "Repetition": 2,
+    "DurationMilliseconds": 28200.916,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "incremental",
+    "Repetition": 2,
+    "DurationMilliseconds": 11956.9669,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "clean",
+    "Repetition": 3,
+    "DurationMilliseconds": 20553.7849,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "r2r-scd",
+    "Category": "incremental",
+    "Repetition": 3,
+    "DurationMilliseconds": 13786.7056,
+    "UncompressedBytes": 109745882,
+    "CompressedBytes": 48177185,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "clean",
+    "Repetition": 1,
+    "DurationMilliseconds": 94617.2021,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "incremental",
+    "Repetition": 1,
+    "DurationMilliseconds": 14296.3496,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "clean",
+    "Repetition": 2,
+    "DurationMilliseconds": 98144.6484,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "incremental",
+    "Repetition": 2,
+    "DurationMilliseconds": 13398.4255,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "clean",
+    "Repetition": 3,
+    "DurationMilliseconds": 104398.9644,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  },
+  {
+    "Profile": "native-aot",
+    "Category": "incremental",
+    "Repetition": 3,
+    "DurationMilliseconds": 13096.8081,
+    "UncompressedBytes": 28306209,
+    "CompressedBytes": 10865327,
+    "Succeeded": true,
+    "Error": null
+  }
+]

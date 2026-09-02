@@ -1,10 +1,11 @@
 # String Analyzer — Exemplo Native AOT CLI Tool
 
-Este projeto demonstra como compilar uma ferramenta CLI em .NET com **Native AOT**. O resultado é um executável nativo standalone, sem dependência de .NET runtime.
+Este projeto demonstra como compilar uma ferramenta CLI em .NET com **Native AOT**. O resultado é um executável nativo autocontido que inclui as partes necessárias do runtime e não exige uma instalação prévia do .NET.
 
 ## O que faz
 
 A ferramenta analisa um arquivo e exibe:
+
 - Total de caracteres
 - Número de caracteres únicos
 - Frequência dos N caracteres mais comuns (padrão: top 10)
@@ -29,7 +30,7 @@ dotnet publish -c Release -r linux-x64 /p:PublishAot=true
 dotnet publish -c Release -r osx-arm64 /p:PublishAot=true
 ```
 
-Executável sai em: `bin/Release/net9.0/<runtime>/publish/StringAnalyzer.Console.exe`
+O executável sai em `bin/Release/net10.0/<runtime>/publish/`. Ele usa a extensão `.exe` no Windows e não tem extensão no Linux ou macOS.
 
 ### Executar
 
@@ -46,7 +47,7 @@ Executável sai em: `bin/Release/net9.0/<runtime>/publish/StringAnalyzer.Console
 
 ### Exemplo de Saída
 
-```
+```text
 📄 Arquivo: sample.txt
 📊 Total de caracteres: 15,432
 📈 Caracteres únicos: 87
@@ -69,7 +70,7 @@ Executável sai em: `bin/Release/net9.0/<runtime>/publish/StringAnalyzer.Console
 
 ## Por que este projeto é AOT-friendly?
 
-1. **System.CommandLine** — library moderna, otimizada para AOT; não usa reflection para parsing de argumentos
+1. **Parsing direto de argumentos** — usa apenas APIs da biblioteca padrão, sem reflection
 2. **Sem reflection dinâmica** — todo acesso a tipos é resolvido em compile-time
 3. **I/O simples** — `File.ReadAllText()` e `StreamReader` funcionam perfeitamente em AOT
 4. **Sem source generators necessários** — não há serialização ou dependency injection complexa
@@ -77,12 +78,13 @@ Executável sai em: `bin/Release/net9.0/<runtime>/publish/StringAnalyzer.Console
 
 ## Comparação de Tamanho
 
-| Build | Tamanho |
-|-------|---------|
-| **JIT (DLL + Runtime)** | ~100 MB (dependência de .NET runtime) |
-| **Native AOT Executable** | ~8–12 MB |
+| Build | Unidade que deve ser medida |
+| --- | --- |
+| **JIT framework-dependent** | Aplicação e instalação compartilhada do runtime |
+| **JIT self-contained** | Diretório publicado com runtime |
+| **Native AOT** | Diretório publicado com runtime reduzido e código nativo |
 
-O executável AOT é standalone e não requer .NET instalado.
+O tamanho varia conforme RID, dependências, recursos, símbolos e código preservado. Compare os diretórios publicados e os artefatos compactados no ambiente alvo.
 
 ## Possíveis Extensões
 
@@ -99,13 +101,13 @@ Se receber warnings durante compilação, verifique:
 dotnet build /p:PublishAot=true -v normal
 ```
 
-Warnings típicos indicam uso de reflection. Resolva com:
+Warnings típicos indicam código que a análise estática não consegue provar. Resolva com:
+
 - `[DynamicallyAccessedMembers]` attribute
-- `[TrimmerRootAssembly]` assembly-level
+- `<TrimmerRootAssembly Include="AssemblyName" />` no projeto, quando preservar o assembly inteiro for realmente necessário
 - Refatore o código para evitar reflection
 
 ## Referências
 
 - [Microsoft Docs — Native AOT](https://learn.microsoft.com/en-us/dotnet/core/deploying/native-aot/)
-- [System.CommandLine](https://github.com/dotnet/command-line-api)
 - [Trimming .NET Applications](https://learn.microsoft.com/en-us/dotnet/core/deploying/trimming/trim-self-contained)
