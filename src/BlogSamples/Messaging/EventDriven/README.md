@@ -68,7 +68,8 @@ Valores aceitos em `order`: `desc` (padrão) e `asc`.
 
 ## Outbox transacional e dual write
 
-Este sample implementa o fluxo clássico de Outbox transacional para evitar dual write:
+Este sample implementa o fluxo clássico de Outbox transacional para evitar dual write. A implementação real usa lock por banco (`FOR UPDATE SKIP LOCKED`) para evitar que múltiplas instâncias do worker publiquem o mesmo lote; o trecho do artigo que mostra o worker em forma simplificada não deve ser tratado como a estratégia de produção.
+
 
 1. O endpoint `POST /event-driven/pedidos` inicia uma transação no PostgreSQL.
 2. Na mesma transação, persiste o estado do pedido (`eventdriven_pedidos`) e as intenções de publicação (`eventdriven_outbox`).
