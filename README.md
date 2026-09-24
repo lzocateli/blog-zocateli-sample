@@ -289,7 +289,7 @@ BlogSamples.sln
 │   ├── Cache/
 │   │   └── Redis/                            # BigKey scanner, Hash sharding, compressão, TTL, namespacing
 │   ├── Security/
-│   │   └── Certificates/                     # Validacao TLS, CA customizada e mTLS com HttpClient
+│   │   ├── Certificates/                     # Validacao TLS, CA customizada, LB/Proxy e mTLS com HttpClient
 │   │   └── Cors/                             # Policies CORS, endpoints de demo e config NGINX
 │   ├── Workers/                              # BackgroundService, IHostedService, Graceful Shutdown
 │   ├── Endpoints/                            # Minimal API endpoints (logging demo)

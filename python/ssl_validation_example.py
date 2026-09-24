@@ -54,6 +54,26 @@ def requisicao_mtls_requests(
     return response
 
 
+def requisicao_via_load_balancer(url_borda: str, ca_borda: Path) -> requests.Response:
+    """TLS Termination/Re-encryption: cliente valida o certificado da borda HTTPS."""
+    return requisicao_https_com_ca_privada(url_borda, ca_borda)
+
+
+def requisicao_via_passthrough(url_backend: str, ca_backend: Path) -> requests.Response:
+    """TLS Passthrough: cliente valida diretamente o certificado da API backend."""
+    return requisicao_https_com_ca_privada(url_backend, ca_backend)
+
+
+def requisicao_mtls_na_borda(
+    url_borda: str,
+    ca_borda: Path,
+    client_cert: Path,
+    client_key: Path,
+) -> requests.Response:
+    """mTLS na borda: proxy valida o certificado de cliente desta API."""
+    return requisicao_mtls_requests(url_borda, ca_borda, client_cert, client_key)
+
+
 def exemplo_execucao() -> None:
     url = os.getenv("TLS_TEST_URL", "https://localhost:8443/health")
 
@@ -69,6 +89,9 @@ def exemplo_execucao() -> None:
 
     response_mtls = requisicao_mtls_requests(url, ca_bundle, client_cert, client_key)
     print("Resposta mTLS:", response_mtls.status_code)
+
+    response_borda = requisicao_via_load_balancer(url, ca_bundle)
+    print("Resposta via Load Balancer/Proxy:", response_borda.status_code)
 
 
 if __name__ == "__main__":
