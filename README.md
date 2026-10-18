@@ -77,6 +77,46 @@ APPLICATIONINSIGHTS__CONNECTIONSTRING="InstrumentationKey=xxx;..."
 
 ---
 
+## GraphQL.NET — Tutorial de GraphQL
+
+O exemplo compartilha o serviço em memória de produtos da API e expõe `POST /graphql` e `GET /api/products/{id}`. Execute a API na porta usada nos comandos:
+
+```bash
+dotnet run --project src/BlogSamples --urls http://localhost:5101
+```
+
+Query GraphQL com variável:
+
+```bash
+curl -X POST http://localhost:5101/graphql \
+  -H 'Content-Type: application/json' \
+  -d '{"query":"query($id:Int!){product(id:$id){id name price category{name}}}","variables":{"id":1}}'
+```
+
+Resposta observada:
+
+```json
+{"data":{"product":{"id":1,"name":"Smartphone Galaxy S25","price":4299.00,"category":{"name":"Eletrônicos"}}}}
+```
+
+O endpoint REST equivalente retorna uma representação fixa do recurso:
+
+```bash
+curl http://localhost:5101/api/products/1
+```
+
+```json
+{"id":1,"name":"Smartphone Galaxy S25","description":"Tela AMOLED 6.2\", 256GB, 5G","price":4299.00,"stock":45,"active":true,"categoryId":1,"categoryName":"Eletrônicos"}
+```
+
+A mutation `createProduct` recebe um `CreateProductInput`, valida nome, preço, estoque e categoria, e altera somente o estado em memória. Uma operação GraphQL com campo desconhecido retorna `400`; erros de validação do resolver retornam `200` com `errors` e o campo da mutation nulo, conforme o transporte GraphQL.
+
+> **Nota:** A API agregadora também inicia outros exemplos, inclusive o worker de outbox que depende de PostgreSQL. Sem essa infraestrutura, ele registra falhas de conexão; os endpoints deste tutorial continuam usando somente o serviço de produtos em memória.
+
+O código completo fica em `src/BlogSamples/GraphQL/`.
+
+---
+
 ## Frontend Angular (Exemplos de referência)
 
 Os projetos em `frontend/` são **exemplos de código** extraídos dos artigos — não são aplicações Angular CLI completas. Para utilizá-los em um projeto Angular real:
@@ -248,8 +288,11 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 22 | Messaging | [Arquitetura de Eventos sem Caos: Guia Prático](https://zocate.li/posts/2026/arquitetura-eventos-sem-caos/) | `src/BlogSamples/Messaging/EventDriven/` |
 | 23 | AsyncParallel | [Thread-Safety em .NET 10 vs Python: Concorrência, GIL e Race Conditions](https://zocate.li/posts/2026/thread-safety-dotnet-10-vs-python-gil-race-conditions/) | `src/BlogSamples/AsyncParallel/ThreadSafety/` |
 | 24 | NativeAot | [.NET Native AOT: JIT, R2R e AOT em Benchmarks](https://zocate.li/posts/2026/dotnet-native-aot-jit-r2r-benchmarks/) | `src/BlogSamples/NativeAot/DecisionLab/` |
+| 25 | GraphQL | GraphQL para Iniciantes: Guia Completo com .NET (publicação prevista para 24/10/2026) | `src/BlogSamples/GraphQL/` |
 
 ## Estrutura do Projeto
+
+O domínio `src/BlogSamples/GraphQL/` contém o schema GraphQL.NET, os resolvers de produtos e categorias, a mutation de criação e o endpoint REST comparativo.
 
 ```
 BlogSamples.sln

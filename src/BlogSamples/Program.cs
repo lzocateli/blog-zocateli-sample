@@ -1,5 +1,6 @@
 using Microsoft.ApplicationInsights.Extensibility;
 using BlogSamples.Endpoints;
+using BlogSamples.GraphQL;
 using BlogSamples.Logging;
 using BlogSamples.Messaging.EventDriven;
 using BlogSamples.Messaging.TempoReal;
@@ -9,6 +10,9 @@ using BlogSamples.Security.Cors;
 using Microsoft.Extensions.Options;
 using Npgsql;
 using Azure.Messaging.ServiceBus;
+using GraphQL;
+using GraphQL.Server;
+using GraphQL.SystemTextJson;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -32,6 +36,14 @@ builder.Services.AddSwaggerGen(c =>
 
 // --- Produtos (Artigo 15 — Blazor WASM + Radzen) ---
 builder.Services.AddSingleton<IProdutoService, ProdutoService>();
+
+// --- GraphQL.NET (artigo introdutório) ---
+builder.Services.AddSingleton<ProdutoGraphType>();
+builder.Services.AddSingleton<CategoriaGraphType>();
+builder.Services.AddSingleton<CriarProdutoInputGraphType>();
+builder.Services.AddGraphQL(options => options
+    .AddSchema<ProdutoSchema>()
+    .AddSystemTextJson());
 
 // --- CORS (policies explícitas por cenário) ---
 builder.Services.AddCorsSeguranca();
@@ -92,6 +104,7 @@ app.MapGet("/", () => Results.Redirect("/docs")).ExcludeFromDescription();
 // --- CORS ---
 app.UseCors();
 app.UseWebSockets();
+app.UseGraphQL<ProdutoSchema>("/graphql");
 
 // --- Middleware Pipeline ---
 app.UseMiddleware<LogEnrichmentMiddleware>();
@@ -101,6 +114,7 @@ app.MapLogLevelEndpoints();
 app.MapOrderEndpoints();
 app.MapCorsEndpoints();
 app.MapProdutoEndpoints();
+app.MapProdutoRestTutorialEndpoint();
 app.MapTempoRealEndpoints();
 app.MapAirflowEndpoints();
 app.MapEventDrivenEndpoints();

@@ -54,6 +54,12 @@
 
     <!-- Cache Redis (Artigo 17) -->
     <PackageReference Include="StackExchange.Redis" Version="2.8.24" />
+
+    <!-- GraphQL para iniciantes (GraphQL.NET 8.8.5, ASP.NET Core transport 8.3.3) -->
+    <PackageReference Include="GraphQL" Version="8.8.5" />
+    <PackageReference Include="GraphQL.MicrosoftDI" Version="8.8.5" />
+    <PackageReference Include="GraphQL.Server.Transports.AspNetCore" Version="8.3.3" />
+    <PackageReference Include="GraphQL.SystemTextJson" Version="8.8.5" />
   </ItemGroup>
 
 </Project>
