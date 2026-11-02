@@ -16,6 +16,7 @@
 
     <!-- Projetos independentes aninhados não pertencem ao projeto web agregador. -->
     <Compile Remove="NativeAot/CliExample/**;NativeAot/DecisionLab/**;Packaging/NuGetPublish/Contoso.TextRules/**" />
+    <Compile Remove="AsyncParallel/Channels/Demo/**" />
   </ItemGroup>
 
   <ItemGroup>
