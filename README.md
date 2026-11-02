@@ -117,6 +117,28 @@ O código completo fica em `src/BlogSamples/GraphQL/`.
 
 ---
 
+## System.Threading.Channels — Pipeline produtor-consumidor
+
+Artigo: **Channels no .NET: filas, backpressure e cancelamento**, com publicação prevista para **15/11/2026**.
+
+O domínio `src/BlogSamples/AsyncParallel/Channels/` contém um pipeline limitado com modo `Wait`, cancelamento cooperativo e falhas coordenadas. O console independente utiliza o mesmo fonte, sem iniciar a API agregadora nem exigir PostgreSQL, broker ou outras dependências externas:
+
+```bash
+dotnet run --project src/BlogSamples/AsyncParallel/Channels/Demo/ChannelsDemo.csproj
+```
+
+O demo processa vinte inteiros com dois consumidores e quatro posições no buffer. A ordem das linhas pode variar; o resultado final deve ser `Total processado: 20`.
+
+Os testes em `tests/BlogSamples.Tests/AsyncParallel/Channels/` verificam conclusão normal, falha do produtor, falha do consumidor, cancelamento, modos de descarte e leitura de item armazenado após conclusão com erro:
+
+```bash
+dotnet test tests/BlogSamples.Tests/BlogSamples.Tests.csproj --filter FullyQualifiedName~ChannelPipelineTests
+```
+
+Na preparação do artigo, os dez casos passaram com os mesmos arquivos de fonte e teste em um projeto xUnit temporário isolado. A restauração da suíte agregadora foi bloqueada por vulnerabilidades preexistentes em dependências criptográficas; sua auditoria não foi desabilitada e a suíte completa não foi considerada aprovada. O demo independente compilou e executou normalmente.
+
+O encerramento normal drena o buffer. Falha ou cancelamento adota fail-fast e pode abandonar itens; o canal não oferece persistência ou recuperação após queda do processo.
+
 ## Frontend Angular (Exemplos de referência)
 
 Os projetos em `frontend/` são **exemplos de código** extraídos dos artigos — não são aplicações Angular CLI completas. Para utilizá-los em um projeto Angular real:
@@ -289,6 +311,7 @@ Scripts de setup para Full-Text Search em diferentes bancos de dados. Execute no
 | 23 | AsyncParallel | [Thread-Safety em .NET 10 vs Python: Concorrência, GIL e Race Conditions](https://zocate.li/posts/2026/thread-safety-dotnet-10-vs-python-gil-race-conditions/) | `src/BlogSamples/AsyncParallel/ThreadSafety/` |
 | 24 | NativeAot | [.NET Native AOT: JIT, R2R e AOT em Benchmarks](https://zocate.li/posts/2026/dotnet-native-aot-jit-r2r-benchmarks/) | `src/BlogSamples/NativeAot/DecisionLab/` |
 | 25 | GraphQL | GraphQL para Iniciantes: Guia Completo com .NET (publicação prevista para 24/10/2026) | `src/BlogSamples/GraphQL/` |
+| 26 | AsyncParallel | Channels no .NET: filas, backpressure e cancelamento (publicação prevista para 15/11/2026) | `src/BlogSamples/AsyncParallel/Channels/` |
 
 ## Estrutura do Projeto
 
@@ -299,6 +322,7 @@ BlogSamples.sln
 ├── src/BlogSamples/                          # Projeto principal (.NET 10 Web API)
 │   ├── ApiDesign/                            # CRUD, Parameter Binding, Models
 │   ├── AsyncParallel/                        # async/await, Parallel, Channels, Git history e thread-safety
+│   │   ├── Channels/                         # Pipeline limitado, demo independente e falhas coordenadas
 │   │   ├── GitHistoryAnalysis/               # Pipeline produtor/consumidor com Channel<T>
 │   │   └── ThreadSafety/                     # Contadores thread-safe (Lock, Interlocked) e ConcurrentDictionary
 │   ├── Authentication/
